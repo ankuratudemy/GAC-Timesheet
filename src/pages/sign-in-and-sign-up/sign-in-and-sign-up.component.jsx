@@ -7,8 +7,9 @@ import { SignInAndSignUpContainer } from './sign-in-and-sign-up.styles';
 
 const SignInAndSignUpPage = () => (
   <SignInAndSignUpContainer>
-    <SignIn />
+    
     <SignUp />
+    <SignIn />
   </SignInAndSignUpContainer>
 );
 

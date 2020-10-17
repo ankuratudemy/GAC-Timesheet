@@ -1,34 +1,62 @@
 import React from 'react';
-
+import { connect } from 'react-redux';
+import { createStructuredSelector } from 'reselect';
 import FormInput from '../form-input/form-input.component';
 import CustomButton from '../custom-button/custom-button.component';
 
 import { auth, signInWithGoogle } from '../../firebase/firebase.utils';
+import {makePostCall} from '../../firebase/user.utils'
+import { setCurrentUser } from '../../redux/user/user.actions';
+import { selectCurrentUser } from '../../redux/user/user.selectors';
+import WithSpinner from '../with-spinner/with-spinner.component'
 
 import {
   SignInContainer,
   SignInTitle,
   ButtonsBarContainer
 } from './sign-in.styles';
+const SignInContainerWithSpinner = WithSpinner(SignInContainer)
 
 class SignIn extends React.Component {
   constructor(props) {
     super(props);
-
+    
     this.state = {
       email: '',
-      password: ''
+      password: '',
+      loading: false
     };
   }
+
+
+
 
   handleSubmit = async event => {
     event.preventDefault();
 
-    const { email, password } = this.state;
+    const onSuccess = (data) => {
+      // Set JSON Web Token on success
+      //setClientToken(data.token);
+      //this.setState({isLoading: false, isAuthorized: true});
+      console.log(data)
+      this.props.setCurrentUser(data)
+      this.state({loading: false});
+    };
 
+    const onFailure = error => {
+      console.log(error && error.response);
+      //this.setState({errors: error.response.data, isLoading: false});
+    };
+
+
+
+
+    const { email, password } = this.state;
+    this.setState({loading: true});
     try {
-      await auth.signInWithEmailAndPassword(email, password);
-      this.setState({ email: '', password: '' });
+      makePostCall('/gac/employeeDetails', {"userId": email,"userPassword": password})
+      .then(onSuccess)
+      .catch(onFailure);
     } catch (error) {
       console.log(error);
     }
@@ -42,17 +70,19 @@ class SignIn extends React.Component {
 
   render() {
     return (
+      
+      this.state.loading ? (<SignInContainerWithSpinner isLoading={this.state.loading} />)
+      :(
       <SignInContainer>
-        <SignInTitle>I already have an account</SignInTitle>
-        <span>Sign in with your email and password</span>
-
+        <SignInTitle>Welcome</SignInTitle>
+        
         <form onSubmit={this.handleSubmit}>
           <FormInput
             name='email'
-            type='email'
+            type='text'
             handleChange={this.handleChange}
             value={this.state.email}
-            label='email'
+            label='User ID'
             required
           />
           <FormInput
@@ -60,19 +90,32 @@ class SignIn extends React.Component {
             type='password'
             value={this.state.password}
             handleChange={this.handleChange}
-            label='password'
+            label='User Password'
             required
           />
           <ButtonsBarContainer>
-            <CustomButton type='submit'> Sign in </CustomButton>
-            <CustomButton onClick={signInWithGoogle} isGoogleSignIn>
+            <CustomButton type='submit'> Login </CustomButton>
+            {/* <CustomButton onClick={signInWithGoogle} isGoogleSignIn>
               Sign in with Google
-            </CustomButton>
+            </CustomButton> */}
           </ButtonsBarContainer>
         </form>
       </SignInContainer>
+    )
     );
   }
 }
 
-export default SignIn;
+// const mapStateToProps = createStructuredSelector({
+//   currentUser: selectCurrentUser
+// });
+
+const mapDispatchToProps = dispatch => ({
+  setCurrentUser: user => dispatch(setCurrentUser(user))
+});
+
+export default connect(
+  null,
+  //mapStateToProps,
+  mapDispatchToProps
+)(SignIn);

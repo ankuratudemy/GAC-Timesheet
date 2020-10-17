@@ -1,17 +1,17 @@
 import styled, { css } from 'styled-components';
 
-const subColor = 'grey';
-const mainColor = 'black';
+const subColor = 'black';
+const mainColor = 'white';
 
 const shrinkLabelStyles = css`
-  top: -14px;
-  font-size: 12px;
+  top: -45px;
+  font-size: 28px;
   color: ${mainColor};
 `;
 
 export const GroupContainer = styled.div`
   position: relative;
-  margin: 45px 0;
+  margin: 60px 0;
 
   input[type='password'] {
     letter-spacing: 0.3em;
@@ -22,14 +22,14 @@ export const FormInputContainer = styled.input`
   background: none;
   background-color: white;
   color: ${subColor};
-  font-size: 18px;
-  padding: 10px 10px 10px 5px;
+  font-size: 25px;
+  padding: 25px 10px 10px 5px;
   display: block;
-  width: 100%;
+  width: 93%;
   border: none;
-  border-radius: 0;
+  border-radius: 5px;
   border-bottom: 1px solid ${subColor};
-  margin: 25px 0;
+  margin: 5px 5px;
 
   &:focus {
     outline: none;
@@ -42,11 +42,11 @@ export const FormInputContainer = styled.input`
 
 export const FormInputLabel = styled.label`
   color: ${subColor};
-  font-size: 16px;
+  font-size: 25px;
   font-weight: normal;
   position: absolute;
   pointer-events: none;
-  left: 5px;
+  left: 15px;
   top: 10px;
   transition: 300ms ease all;
 

@@ -1,16 +1,24 @@
 import styled from 'styled-components';
 
 export const SignInContainer = styled.div`
-  width: 380px;
+  width: 100vh;
+  height: 100vh;
   display: flex;
   flex-direction: column;
+  background-color: #016879;
 `;
 
 export const SignInTitle = styled.h2`
-  margin: 10px 0;
+font-weight: bold;
+margin-bottom: 106px;
+font-size: 48px;
+color: white;
+text-align: center;
+  
 `;
 
 export const ButtonsBarContainer = styled.div`
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
+  background-color: #016879;
 `;

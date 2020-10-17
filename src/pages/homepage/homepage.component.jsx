@@ -1,13 +1,18 @@
 import React from 'react';
-
-import Directory from '../../components/directory/directory.component';
-
+import { connect } from 'react-redux';
+import { createStructuredSelector } from 'reselect';
 import { HomePageContainer } from './homepage.styles';
+
+import SubmitTimesheet from '../../components/submit-timesheet-icon/submit-timesheet-icon.component';
 
 const HomePage = () => (
   <HomePageContainer>
-    <Directory />
+  <SubmitTimesheet />
   </HomePageContainer>
 );
 
+
+
+
 export default HomePage;
+

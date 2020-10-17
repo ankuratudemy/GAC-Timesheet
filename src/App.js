@@ -12,7 +12,6 @@ import CheckoutPage from './pages/checkout/checkout.component';
 
 import Header from './components/header/header.component';
 
-import { auth, createUserProfileDocument } from './firebase/firebase.utils';
 
 import { setCurrentUser } from './redux/user/user.actions';
 import { selectCurrentUser } from './redux/user/user.selectors';
@@ -21,22 +20,7 @@ class App extends React.Component {
   unsubscribeFromAuth = null;
 
   componentDidMount() {
-    const { setCurrentUser } = this.props;
 
-    this.unsubscribeFromAuth = auth.onAuthStateChanged(async userAuth => {
-      if (userAuth) {
-        const userRef = await createUserProfileDocument(userAuth);
-
-        userRef.onSnapshot(snapShot => {
-          setCurrentUser({
-            id: snapShot.id,
-            ...snapShot.data()
-          });
-        });
-      }
-
-      setCurrentUser(userAuth);
-    });
   }
 
   componentWillUnmount() {
@@ -46,17 +30,14 @@ class App extends React.Component {
   render() {
     return (
       <div>
-        <Header />
+        {!this.props.currentUser ? null: <Header />}
         <Switch>
-          <Route exact path='/' component={HomePage} />
+          
+    <Route exact path='/submit-timesheet' render={() => this.props.currentUser ? (<HomePage />) :(<SignInAndSignUpPage />)} />
           <Route path='/shop' component={ShopPage} />
           <Route exact path='/checkout' component={CheckoutPage} />
-          <Route
-            exact
-            path='/signin'
-            render={() =>
-              this.props.currentUser ? (
-                <Redirect to='/' />
+
+          <Route exact path='/signin'   render={() => this.props.currentUser ? ( <Redirect to='/submit-timesheet' />
               ) : (
                 <SignInAndSignUpPage />
               )

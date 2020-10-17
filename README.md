@@ -1,6 +1,6 @@
-## Lesson-26-complete
+## Timesheet - Project
 
-In this repository, all our components have been converted to styled-components!
+Timesheet Project 
 
 
 # How to fork and clone

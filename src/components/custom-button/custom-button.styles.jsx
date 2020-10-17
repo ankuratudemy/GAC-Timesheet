@@ -1,9 +1,10 @@
 import styled, { css } from 'styled-components';
 
 const buttonStyles = css`
-  background-color: black;
+  background-color: orange;
   color: white;
   border: none;
+  border-radius: 5px;
 
   &:hover {
     background-color: white;
