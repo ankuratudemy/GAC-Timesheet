@@ -14,7 +14,8 @@ const persistConfig = {
   whitelist: ['user']
 };
 
-const rootReducer = combineReducers({
+
+const appReducer = combineReducers({
   user: userReducer,
   cart: cartReducer,
   directory: directoryReducer,
@@ -22,4 +23,12 @@ const rootReducer = combineReducers({
   submitTimesheet: submitTimesheetReducer
 });
 
+const rootReducer = (state, action) => {
+  if (action.type === 'USER_LOGOUT') {
+    storage.removeItem('persist:root')
+    state = undefined
+
+  }
+  return appReducer(state, action)
+}
 export default persistReducer(persistConfig, rootReducer);

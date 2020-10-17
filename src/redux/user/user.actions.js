@@ -4,3 +4,10 @@ export const setCurrentUser = user => ({
   type: UserActionTypes.SET_CURRENT_USER,
   payload: user
 });
+
+export const logoutUser = user => ({
+  type: UserActionTypes.USER_LOGOUT,
+  payload: user
+});
+
+

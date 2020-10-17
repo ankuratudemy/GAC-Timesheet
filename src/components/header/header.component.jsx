@@ -7,7 +7,7 @@ import CartIcon from '../cart-icon/cart-icon.component';
 import CartDropdown from '../cart-dropdown/cart-dropdown.component';
 import { selectCartHidden } from '../../redux/cart/cart.selectors';
 import { selectCurrentUser } from '../../redux/user/user.selectors';
-import { setCurrentUser } from '../../redux/user/user.actions';
+import { logoutUser } from '../../redux/user/user.actions';
 import { ReactComponent as Logo } from '../../assets/crown.svg';
 
 import {
@@ -19,7 +19,7 @@ import {
   HeaderLogoutButton
 } from './header.styles';
 
-const Header = ({ currentUser, hidden,setCurrentUser }) => (
+const Header = ({ currentUser, hidden,logoutUser }) => (
   <HeaderContainer>
     {/* <LogoContainer to='/'>
       <Logo className='logo' />
@@ -45,7 +45,7 @@ const Header = ({ currentUser, hidden,setCurrentUser }) => (
       
     </OptionsContainer>
     <ButtonsBarContainer>
-            <HeaderLogoutButton type='submit' onClick={()=>setCurrentUser(null)}> Logout </HeaderLogoutButton>
+            <HeaderLogoutButton type='submit' onClick={()=>logoutUser(null)}> Logout </HeaderLogoutButton>
             
       </ButtonsBarContainer>
   </HeaderContainer>
@@ -57,7 +57,7 @@ const mapStateToProps = createStructuredSelector({
 });
 
 const mapDispatchToProps = dispatch => ({
-  setCurrentUser: user => dispatch(setCurrentUser(user))
+  logoutUser: user => dispatch(logoutUser(user))
 });
 
 export default connect(mapStateToProps,mapDispatchToProps)(Header);
