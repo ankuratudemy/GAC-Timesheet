@@ -1,17 +1,24 @@
 import React from 'react';
 import Helmet from 'react-helmet'
 import moment from 'moment';
+
 import DayPicker from 'react-day-picker';
 import 'react-day-picker/lib/style.css';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { selectSelectedDays,selectHoverRange,selectWeekNumber} from '../../redux/submit-timesheet/submit-timesheet.selectors'
 import { setSelectedDays,setHoverRange,setWeekNumber } from '../../redux/submit-timesheet/submit-timesheet.actions';
-
+moment.locale('uk', {
+  week: {
+    dow: 1,
+  },
+})
 
 function getWeekDays(weekStart) {
+  console.log(weekStart)
+   
   const days = [weekStart];
-  for (let i = 1; i < 7; i += 1) {
+  for (let i =1; i < 7; i += 1) {
     days.push(
       moment(weekStart)
         .add(i, 'days')
@@ -101,11 +108,13 @@ class WeekSelector extends React.Component {
       hoverRangeEnd: hoverRange && hoverRange.to,
       selectedRangeStart: daysAreSelected && this.props.selectedDays[0],
       selectedRangeEnd: daysAreSelected && this.props.selectedDays[6],
+      
     };
 
     return (
       <div className="SelectedWeekExample">
         <DayPicker 
+          firstDayOfWeek={ 1 }
           selectedDays={this.props.selectedDays?this.props.selectedDays:[]}
           showWeekNumbers
           showOutsideDays

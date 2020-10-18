@@ -25,7 +25,7 @@ const Header = ({ currentUser, hidden,logoutUser }) => (
       <Logo className='logo' />
     </LogoContainer> */}
     <OptionsContainer>
-      <OptionLink to='/submit-timesheet'>Submit Timesheet</OptionLink>
+      <OptionLink to='/my-timesheet'>My Timesheet</OptionLink>
       <OptionLink to='/shop'>Approve Timesheets</OptionLink>
       <OptionLink to='/shop'>Assign Projects</OptionLink>
       <OptionLink to='/shop'>Dashboard</OptionLink>
