@@ -7,6 +7,7 @@ import cartReducer from './cart/cart.reducer';
 import submitTimesheetReducer from './submit-timesheet/submit-timesheet.reducer'
 import directoryReducer from './directory/directory.reducer';
 import shopReducer from './shop/shop.reducer';
+import viewTimesheetReducer from './view-timesheet/view-timesheet.reducer';
 
 const persistConfig = {
   key: 'root',
@@ -20,7 +21,8 @@ const appReducer = combineReducers({
   cart: cartReducer,
   directory: directoryReducer,
   shop: shopReducer,
-  submitTimesheet: submitTimesheetReducer
+  submitTimesheet: submitTimesheetReducer,
+  viewTimesheet: viewTimesheetReducer
 });
 
 const rootReducer = (state, action) => {

@@ -4,15 +4,12 @@ import { createStructuredSelector } from 'reselect';
 import { TimesheetPageContainer } from './timesheet.styles';
 import { withRouter } from 'react-router-dom';
 import SubmitTimesheet from '../../components/submit-timesheet-icon/submit-timesheet-icon.component';
-import TimesheetPreview from '../../components/timesheet-preview/timesheet-preview.component'
-import SubmitTimesheetTable from '../../components/submit-timesheet-table/submit-timesheet-table.component';
-import ViewTimesheetTable from '../../components/view-timesheet-table/view-timesheet-table.component'
-
+import ViewTimesheet from '../../components/view-timesheet-icon/view-timesheet-icon.component'
 const Timesheet = ({history, match}) => (
   <TimesheetPageContainer>
     {/* {console.log(history.location.pathname)} */}
    {/* <TimesheetPreview/> */}
-  {history.location.pathname === "/my-timesheet/view"? <ViewTimesheetTable />: null}
+  {history.location.pathname === "/my-timesheet/view"? <ViewTimesheet />: null}
   {history.location.pathname === "/my-timesheet/submit"? <SubmitTimesheet />: null}
   </TimesheetPageContainer>
 );

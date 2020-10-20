@@ -1,32 +1,32 @@
 import { createSelector } from 'reselect';
 
-const selectTimesheet = state => state.submitTimesheet;
+const selectSubmitTimesheet = state => state.submitTimesheet;
 
 
 
 export const selectPickerHidden = createSelector(
-  [selectTimesheet],
+  [selectSubmitTimesheet],
   submitTimesheet => submitTimesheet.hidden
 );
 
 export const selectSelectedDays = createSelector(
-  [selectTimesheet],
+  [selectSubmitTimesheet],
   submitTimesheet => submitTimesheet.selectedDays
 );
 
 
 export const selectHoverRange = createSelector(
-  [selectTimesheet],
+  [selectSubmitTimesheet],
   submitTimesheet => submitTimesheet.hoverRange
 );
 
 export const selectWeekNumber = createSelector(
-  [selectTimesheet],
+  [selectSubmitTimesheet],
   submitTimesheet => submitTimesheet.weekNumber
 );
 
-export const selectTimesheetData = createSelector(
-  [selectTimesheet],
+export const selectSubmitTimesheetData = createSelector(
+  [selectSubmitTimesheet],
   submitTimesheet => submitTimesheet.timesheetData
 );
 
