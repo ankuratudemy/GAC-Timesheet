@@ -1,7 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import {compose} from 'redux'
 import { createStructuredSelector } from 'reselect';
-
+import {WithRouter} from 'react-router-dom'
 import { auth } from '../../firebase/firebase.utils';
 import CartIcon from '../cart-icon/cart-icon.component';
 import CartDropdown from '../cart-dropdown/cart-dropdown.component';
@@ -79,4 +80,4 @@ const mapDispatchToProps = dispatch => ({
   logoutUser: user => dispatch(logoutUser(user))
 });
 
-export default connect(mapStateToProps,mapDispatchToProps)(Header);
+export default compose(WithRouter,connect(mapStateToProps,mapDispatchToProps)(Header));

@@ -1,7 +1,8 @@
-import React from 'react';
+import React,{ useState } from 'react';
 import { connect } from 'react-redux';
+import {compose} from 'redux'
 import { createStructuredSelector } from 'reselect';
-
+import { withRouter } from 'react-router-dom';
 import { auth } from '../../firebase/firebase.utils';
 import CartIcon from '../cart-icon/cart-icon.component';
 import CartDropdown from '../cart-dropdown/cart-dropdown.component';
@@ -16,16 +17,38 @@ import {
   ButtonsBarContainer,
   OptionsContainer,
   OptionLink,
-  HeaderLogoutButton
+  HeaderLogoutButton,
+  DropDownListContainer,
+  DropDownContainer,
+  DropDownList,
+  ListItem,
+  DropDownHeader
 } from './header.styles';
 
-const Header = ({ currentUser, hidden,logoutUser }) => (
+
+const Header = ({history, currentUser, hidden,logoutUser }) => {
+  const [isOpen, setIsOpen] = useState(false);
+  const toggling = () => setIsOpen(!isOpen);
+  return (
   <HeaderContainer>
     {/* <LogoContainer to='/'>
       <Logo className='logo' />
     </LogoContainer> */}
     <OptionsContainer>
-      <OptionLink to='/my-timesheet'>My Timesheet</OptionLink>
+      {/* <OptionLink to='/my-timesheet'>My Timesheet</OptionLink> */}
+      <OptionLink to='/'>Home</OptionLink>
+      <OptionLink onMouseEnter={toggling} onMouseLeave={toggling} >
+      Timesheet
+      {isOpen && (
+          <DropDownListContainer >
+            <DropDownList>
+              <ListItem onClick={()=>history.push('/my-timesheet/view')}>View Timesheet</ListItem>
+              <ListItem onClick={()=>history.push('/my-timesheet/submit')}>Submit Timesheet</ListItem>
+              
+            </DropDownList>
+          </DropDownListContainer>
+        )}
+      </OptionLink>
       <OptionLink to='/shop'>Approve Timesheets</OptionLink>
       <OptionLink to='/shop'>Assign Projects</OptionLink>
       <OptionLink to='/shop'>Dashboard</OptionLink>
@@ -49,7 +72,7 @@ const Header = ({ currentUser, hidden,logoutUser }) => (
             
       </ButtonsBarContainer>
   </HeaderContainer>
-);
+)};
 
 const mapStateToProps = createStructuredSelector({
   currentUser: selectCurrentUser,
@@ -60,4 +83,4 @@ const mapDispatchToProps = dispatch => ({
   logoutUser: user => dispatch(logoutUser(user))
 });
 
-export default connect(mapStateToProps,mapDispatchToProps)(Header);
+export default withRouter(connect(mapStateToProps,mapDispatchToProps)(Header));

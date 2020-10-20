@@ -1,6 +1,10 @@
 body {
   font-family: 'Open Sans Condensed';
   padding: 10px 10px;
+  background-image: url(./assets/watermark.png);
+  background-position: center;
+  background-repeat: no-repeat;
+  enable-background: inherit;
 }
 
 a {

@@ -4,8 +4,9 @@ import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 
 import './App.css';
-
+import watermark from './assets/open-timesheet.PNG'
 import HomePage from './pages/homepage/homepage.component';
+import Timesheet from './pages/Timesheet/timesheet.component'
 import ShopPage from './pages/shop/shop.component';
 import SignInAndSignUpPage from './pages/sign-in-and-sign-up/sign-in-and-sign-up.component';
 import CheckoutPage from './pages/checkout/checkout.component';
@@ -29,11 +30,11 @@ class App extends React.Component {
 
   render() {
     return (
-      <div>
+      <div >
         {!this.props.currentUser ? null: <Header />}
         <Switch>
           
-          <Route path='/my-timesheet' render={() => this.props.currentUser ? (<HomePage />) :(<SignInAndSignUpPage />)} />
+          <Route path='/my-timesheet' render={() => this.props.currentUser ? (<Timesheet />) :(<SignInAndSignUpPage />)} />
           <Route path='/shop' render={() => this.props.currentUser ? (<HomePage />) :(<SignInAndSignUpPage />)}  />
           <Route exact path='/checkout' render={() => this.props.currentUser ? (<HomePage />) :(<SignInAndSignUpPage />)}  />
 
@@ -43,7 +44,10 @@ class App extends React.Component {
               )
 
             }
+           
           />
+          <Route path='/' render={() => this.props.currentUser ? (<HomePage />) :(<SignInAndSignUpPage />)}  />
+
         </Switch>
       </div>
     );

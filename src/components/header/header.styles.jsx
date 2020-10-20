@@ -9,6 +9,7 @@ export const HeaderContainer = styled.div`
   margin-bottom: none;
   background-color: #016879;
   position: relative;
+  z-index: 10000;
 `;
 
 export const LogoContainer = styled(Link)`
@@ -28,7 +29,7 @@ export const OptionsContainer = styled.div`
 export const OptionLink = styled(Link)`
   padding: 30px 30px;
   cursor: pointer;
-  display: flex;
+  display: block;
   float: left;
   margin-bottom: 0px;
   margin-top: 10px;
@@ -65,4 +66,47 @@ min-width: 70px;
   letter-spacing: 2px;
   line-height: 40px;
   text-transform: none;
+`;
+
+
+export const DropDownContainer = styled("div")`
+  width: 5.5em;
+  margin: 0 auto;
+`;
+
+export const DropDownHeader = styled("div")`
+  margin-bottom: 0.8em;
+  padding: 0.4em 2em 0.4em 1em;
+  box-shadow: 0 2px 3px rgba(0, 0, 0, 0.15);
+  font-weight: 500;
+  font-size: 1.3rem;
+  color: #3faffa;
+  background: #ffffff;
+`;
+
+export const DropDownListContainer = styled("div")`
+
+background: #016789;
+`;
+
+export const DropDownList = styled("ul")`
+  padding: 0;
+  margin: 0;
+  padding-left: 0.3em;
+  padding-right: 0.3em;
+  background: #ffffff;
+  border: 2px solid #e5e5e5;
+  box-sizing: border-box;
+  color: #3faffa;
+  font-size: 1rem;
+  font-weight: 500;
+  background: #016789;
+  &:first-child {
+    padding-top: 0.8em;
+  }
+`;
+
+export const ListItem = styled("li")`
+  list-style: none;
+  margin-bottom: 0.8em;
 `;
