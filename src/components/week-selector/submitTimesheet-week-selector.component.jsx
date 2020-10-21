@@ -6,8 +6,8 @@ import DayPicker from 'react-day-picker';
 import 'react-day-picker/lib/style.css';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
-import { selectSelectedDays,selectHoverRange,selectWeekNumber} from '../../redux/submit-timesheet/submit-timesheet.selectors'
-import { setSelectedDays,setHoverRange,setWeekNumber } from '../../redux/submit-timesheet/submit-timesheet.actions';
+import { selectSubmitSelectedDays,selectSubmitHoverRange,selectSubmitWeekNumber} from '../../redux/submit-timesheet/submit-timesheet.selectors'
+import { setSubmitSelectedDays,setSubmitHoverRange,setSubmitWeekNumber } from '../../redux/submit-timesheet/submit-timesheet.actions';
 moment.locale('uk', {
   week: {
     dow: 1,
@@ -62,11 +62,11 @@ class WeekSelector extends React.Component {
     
   handleDayChange = (date) => {
    
-    this.props.setSelectedDays(getWeekDays(getWeekRange(date).from));
+    this.props.setSubmitSelectedDays(getWeekDays(getWeekRange(date).from));
     let year_week = getWeekNumber(date)
     console.log(year_week[1])
-    this.props.setWeekNumber(year_week[1]);
-    this.props.setHoverRange(getWeekRange(date))
+    this.props.setSubmitWeekNumber(year_week[1]);
+    this.props.setSubmitHoverRange(getWeekRange(date))
     
   };
 
@@ -78,15 +78,15 @@ class WeekSelector extends React.Component {
   
   handleDayLeave = () => {
 
-   // this.props.setHoverRange(undefined)
+   // this.props.setSubmitHoverRange(undefined)
   };
 
   handleWeekClick = (weekNumber, days, e) => {
 
-    this.props.setSelectedDays(days);
-    this.props.setWeekNumber(weekNumber)
+    this.props.setSubmitSelectedDays(days);
+    this.props.setSubmitWeekNumber(weekNumber)
     console.log("333");
-    this.props.setHoverRange(getWeekRange(days[0]))
+    this.props.setSubmitHoverRange(getWeekRange(days[0]))
     
     
   };
@@ -188,15 +188,15 @@ class WeekSelector extends React.Component {
 
 
 const mapStateToProps = createStructuredSelector({
-  selectedDays: selectSelectedDays,
-  hoverRange: selectHoverRange,
-  weekNumber: selectWeekNumber
+  selectedDays: selectSubmitSelectedDays,
+  hoverRange: selectSubmitHoverRange,
+  weekNumber: selectSubmitWeekNumber
 });
 
 const mapDispatchToProps = dispatch => ({
-  setSelectedDays: selectedDays => dispatch(setSelectedDays(selectedDays)),
-  setHoverRange: hoverRange => dispatch(setHoverRange(hoverRange)),
-  setWeekNumber: weekNumber => dispatch(setWeekNumber(weekNumber))
+  setSubmitSelectedDays: selectedDays => dispatch(setSubmitSelectedDays(selectedDays)),
+  setSubmitHoverRange: hoverRange => dispatch(setSubmitHoverRange(hoverRange)),
+  setSubmitWeekNumber: weekNumber => dispatch(setSubmitWeekNumber(weekNumber))
   
 });
 

@@ -3,9 +3,9 @@ import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { withRouter } from 'react-router-dom';
 
-import WeekSelector  from '../week-selector/week-selector.component'
+import WeekSelector  from '../week-selector/submitTimesheet-week-selector.component'
 
-import { selectSelectedDays,selectHoverRange} from '../../redux/submit-timesheet/submit-timesheet.selectors'
+import { selectSubmitSelectedDays,selectSubmitHoverRange} from '../../redux/submit-timesheet/submit-timesheet.selectors'
 import SubmitTimesheetTable from '../submit-timesheet-table/submit-timesheet-table.component'
 
 import {
@@ -23,8 +23,8 @@ const SubmitTimesheetDropdown = ({hoverRange,selectedDays}) => (
 );
 
 const mapStateToProps = createStructuredSelector({
-  selectedDays: selectSelectedDays,
-  hoverRange: selectHoverRange
+  selectedDays: selectSubmitSelectedDays,
+  hoverRange: selectSubmitHoverRange
 });
 
 // const mapDispatchToProps = dispatch => ({

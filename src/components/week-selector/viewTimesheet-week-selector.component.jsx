@@ -85,7 +85,6 @@ class ViewWeekSelector extends React.Component {
 
     this.props.setSelectedDays(days);
     this.props.setWeekNumber(weekNumber)
-    console.log("333");
     this.props.setHoverRange(getWeekRange(days[0]))
     
     

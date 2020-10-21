@@ -2,39 +2,39 @@ import SubmitTimesheetActionTypes from './submit-timesheet.types';
 //import { addItemToCart, removeItemFromCart } from './cart.utils';
 
 const INITIAL_STATE = {
-  hidden: true,
-  selectedDays: [],
-  hoverRange: {},
-  timesheetData: [],
-  weekNumber: null
+  submitHidden: true,
+  submitSelectedDays: [],
+  submitHoverRange: {},
+  submitTimesheetData: [],
+  submitWeekNumber: null
 };
 
 const submitTimesheetReducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {
-    case SubmitTimesheetActionTypes.TOGGLE_PICKER_HIDDEN:
+    case SubmitTimesheetActionTypes.ST_TOGGLE_PICKER_HIDDEN:
       return {
         ...state,
-        hidden: !state.hidden
+        submitHidden: !state.submitHidden
       };
-      case SubmitTimesheetActionTypes.SET_SELECTED_DAYS:
+      case SubmitTimesheetActionTypes.ST_SET_SELECTED_DAYS:
       return {
         ...state,
-        selectedDays: action.payload
+        submitSelectedDays: action.payload
       };
-      case SubmitTimesheetActionTypes.SET_HOVER_RANGE:
+      case SubmitTimesheetActionTypes.ST_SET_HOVER_RANGE:
       return {
         ...state,
-        hoverRange: action.payload
+        submitHoverRange: action.payload
       };
-      case SubmitTimesheetActionTypes.SET_TIMESHEET_DATA:
+      case SubmitTimesheetActionTypes.ST_SET_TIMESHEET_DATA:
       return {
         ...state,
-        timesheetData: action.payload
+        submitTimesheetData: action.payload
       };
-      case SubmitTimesheetActionTypes.SET_WEEK_NUMBER:
+      case SubmitTimesheetActionTypes.ST_SET_WEEK_NUMBER:
       return {
         ...state,
-        weekNumber: action.payload
+        submitWeekNumber: action.payload
       };
     default:
       return state;

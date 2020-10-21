@@ -2,26 +2,26 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 
-import {togglePickerHidden } from '../../redux/submit-timesheet/submit-timesheet.actions';
-import {selectPickerHidden} from '../../redux/submit-timesheet/submit-timesheet.selectors'
+import {SubmitTogglePickerHidden } from '../../redux/submit-timesheet/submit-timesheet.actions';
+import {selectSubmitPickerHidden} from '../../redux/submit-timesheet/submit-timesheet.selectors'
 import SubmitTimesheetDropdown from '../../components/submit-timesheet-dropdown/submit-timesheet-dropdown.component';
 
 import {SubmitTimesheetContainer,SubmitTimesheetIcon} from './submit-timesheet-icon.styles'
 
-const SubmitTimesheet = ({togglePickerHidden,hidden}) => (
+const SubmitTimesheet = ({SubmitTogglePickerHidden,submitHidden}) => (
   <SubmitTimesheetContainer >
-    <SubmitTimesheetIcon onClick={togglePickerHidden}/>
-    {hidden ? null : <SubmitTimesheetDropdown />}
+    <SubmitTimesheetIcon onClick={SubmitTogglePickerHidden}/>
+    {submitHidden ? null : <SubmitTimesheetDropdown />}
   </SubmitTimesheetContainer>
   
 );
 
 const mapDispatchToProps = dispatch => ({
-  togglePickerHidden: () => dispatch(togglePickerHidden())
+  SubmitTogglePickerHidden: () => dispatch(SubmitTogglePickerHidden())
 });
 
 const mapStateToProps = createStructuredSelector({
-  hidden: selectPickerHidden
+  submitHidden: selectSubmitPickerHidden
 });
 
 export default connect(

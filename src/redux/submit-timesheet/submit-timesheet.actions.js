@@ -1,27 +1,27 @@
 import SubmitTimesheetActionTypes from './submit-timesheet.types';
 
-export const togglePickerHidden = () => ({
-  type: SubmitTimesheetActionTypes.TOGGLE_PICKER_HIDDEN
+export const SubmitTogglePickerHidden = () => ({
+  type: SubmitTimesheetActionTypes.ST_TOGGLE_PICKER_HIDDEN
 });
 
 
-export const setSelectedDays = selectedDays => ({
-  type: SubmitTimesheetActionTypes.SET_SELECTED_DAYS,
-  payload: selectedDays
+export const setSubmitSelectedDays = submitSelectedDays => ({
+  type: SubmitTimesheetActionTypes.ST_SET_SELECTED_DAYS,
+  payload: submitSelectedDays
 });
 
-export const setHoverRange = hoverRange => ({
-  type: SubmitTimesheetActionTypes.SET_HOVER_RANGE,
-  payload: hoverRange
+export const setSubmitHoverRange = submitHoverRange => ({
+  type: SubmitTimesheetActionTypes.ST_SET_HOVER_RANGE,
+  payload: submitHoverRange
 });
 
-export const setWeekNumber = weekNumber => ({
-  type: SubmitTimesheetActionTypes.SET_WEEK_NUMBER,
-  payload: weekNumber
+export const setSubmitWeekNumber = submitWeekNumber => ({
+  type: SubmitTimesheetActionTypes.ST_SET_WEEK_NUMBER,
+  payload: submitWeekNumber
 });
 
-export const setTimesheetData = timesheetData => ({
-  type: SubmitTimesheetActionTypes.SET_TIMESHEET_DATA,
-  payload: timesheetData
+export const setSubmitTimesheetData = submitTimesheetData => ({
+  type: SubmitTimesheetActionTypes.ST_SET_TIMESHEET_DATA,
+  payload: submitTimesheetData
 });
 

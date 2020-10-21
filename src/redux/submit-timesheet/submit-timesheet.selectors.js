@@ -4,30 +4,30 @@ const selectSubmitTimesheet = state => state.submitTimesheet;
 
 
 
-export const selectPickerHidden = createSelector(
+export const selectSubmitPickerHidden = createSelector(
   [selectSubmitTimesheet],
-  submitTimesheet => submitTimesheet.hidden
+  submitTimesheet => submitTimesheet.submitHidden
 );
 
-export const selectSelectedDays = createSelector(
+export const selectSubmitSelectedDays = createSelector(
   [selectSubmitTimesheet],
-  submitTimesheet => submitTimesheet.selectedDays
+  submitTimesheet => submitTimesheet.submitSelectedDays
 );
 
 
-export const selectHoverRange = createSelector(
+export const selectSubmitHoverRange = createSelector(
   [selectSubmitTimesheet],
-  submitTimesheet => submitTimesheet.hoverRange
+  submitTimesheet => submitTimesheet.submitHoverRange
 );
 
-export const selectWeekNumber = createSelector(
+export const selectSubmitWeekNumber = createSelector(
   [selectSubmitTimesheet],
-  submitTimesheet => submitTimesheet.weekNumber
+  submitTimesheet => submitTimesheet.submitWeekNumber
 );
 
 export const selectSubmitTimesheetData = createSelector(
   [selectSubmitTimesheet],
-  submitTimesheet => submitTimesheet.timesheetData
+  submitTimesheet => submitTimesheet.submitTimesheetData
 );
 
 
