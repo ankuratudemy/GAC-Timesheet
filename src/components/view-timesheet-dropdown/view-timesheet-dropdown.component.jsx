@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { withRouter } from 'react-router-dom';
 
-import WeekSelector  from '../week-selector/week-selector.component'
+import ViewWeekSelector  from '../week-selector/viewTimesheet-week-selector.component'
 
 import { selectSelectedDays,selectHoverRange} from '../../redux/view-timesheet/view-timesheet.selectors'
 import ViewTimesheetTable from '../view-timesheet-table/view-timesheet-table.component'
@@ -16,7 +16,7 @@ import {
 const ViewTimesheetDropdown = ({hoverRange,selectedDays}) => (
   <ViewTimesheetDropdownContainer>
   
-    <WeekSelector/>
+    <ViewWeekSelector/>
     {selectedDays.length === 7 && (
           <ViewTimesheetTable />)}
   </ViewTimesheetDropdownContainer>
