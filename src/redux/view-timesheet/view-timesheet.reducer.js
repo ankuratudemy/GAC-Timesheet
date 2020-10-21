@@ -1,12 +1,13 @@
 import ViewTimesheetActionTypes from './view-timesheet.types';
-//import { addItemToCart, removeItemFromCart } from './cart.utils';
+import { getViewTSData } from './viewTimesheet.utils';
 
 const INITIAL_STATE = {
   hidden: true,
   selectedDays: [],
   hoverRange: {},
   timesheetData: [],
-  weekNumber: null
+  weekNumber: null,
+  viewTSData: []
 };
 
 const viewTimesheetReducer = (state = INITIAL_STATE, action) => {
@@ -21,6 +22,11 @@ const viewTimesheetReducer = (state = INITIAL_STATE, action) => {
         ...state,
         selectedDays: action.payload
       };
+      case ViewTimesheetActionTypes.GET_VIEWTS_DATA:
+        return {
+          ...state,
+          viewTSData: getViewTSData(state.selectedDays, action.payload)
+        };
       case ViewTimesheetActionTypes.SET_HOVER_RANGE:
       return {
         ...state,

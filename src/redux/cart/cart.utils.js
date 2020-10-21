@@ -29,3 +29,11 @@ export const removeItemFromCart = (cartItems, cartItemToRemove) => {
       : cartItem
   );
 };
+
+
+export const getViewTSData = (selectedDays, userid) => {
+
+  console.log("###Received action GetViewTSDATA## :\n"+ selectedDays + userid)
+
+  return [];
+};

@@ -3,9 +3,11 @@ import { AgGridColumn, AgGridReact } from 'ag-grid-react';
 
 import 'ag-grid-community/dist/styles/ag-grid.css';
 import 'ag-grid-community/dist/styles/ag-theme-alpine.css';
+import { connect } from 'react-redux';
+import { createStructuredSelector } from 'reselect';
+import { selectSelectedDays,selectHoverRange} from '../../redux/view-timesheet/view-timesheet.selectors'
 
-
-const ViewTimesheetTable = () => {
+const ViewTimesheetTable = ({selectSelectedDays}) => {
     const [gridApi, setGridApi] = useState(null);
     const [gridColumnApi, setGridColumnApi] = useState(null);
 
@@ -26,5 +28,10 @@ const ViewTimesheetTable = () => {
         </div>
     );
 };
+
+const mapStateToProps = createStructuredSelector({
+    selectedDays: selectSelectedDays,
+    hoverRange: selectHoverRange
+  });
 
 export default ViewTimesheetTable;

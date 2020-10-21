@@ -30,6 +30,10 @@ export const selectTimesheetData = createSelector(
   viewTimesheet => viewTimesheet.timesheetData
 );
 
+export const selectViewTSData = createSelector(
+  [selectViewTimesheet],
+  viewTimesheet => viewTimesheet.viewTSDATA
+);
 
 
 
