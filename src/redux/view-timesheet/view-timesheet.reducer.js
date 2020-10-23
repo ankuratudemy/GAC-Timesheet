@@ -10,7 +10,7 @@ const INITIAL_STATE = {
   viewTSData: []
 };
 
-const viewTimesheetReducer = (state = INITIAL_STATE, action) => {
+const viewTimesheetReducer =  (state = INITIAL_STATE, action) => {
   switch (action.type) {
     case ViewTimesheetActionTypes.TOGGLE_PICKER_HIDDEN:
       return {
@@ -22,21 +22,19 @@ const viewTimesheetReducer = (state = INITIAL_STATE, action) => {
         ...state,
         selectedDays: action.payload
       };
-      case ViewTimesheetActionTypes.GET_VIEWTS_DATA:
+      case ViewTimesheetActionTypes.SET_VIEWTS_DATA:
+        console.log("Inside Reducer case",action.payload)
         return {
+
           ...state,
-          viewTSData: getViewTSData(state.selectedDays, action.payload)
+          viewTSData:  getViewTSData('/gac/viewTimeSheet',  {svsId: action.payload})
         };
       case ViewTimesheetActionTypes.SET_HOVER_RANGE:
       return {
         ...state,
         hoverRange: action.payload
       };
-      case ViewTimesheetActionTypes.SET_TIMESHEET_DATA:
-      return {
-        ...state,
-        timesheetData: action.payload
-      };
+     
       case ViewTimesheetActionTypes.SET_WEEK_NUMBER:
       return {
         ...state,

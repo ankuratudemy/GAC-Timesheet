@@ -4,6 +4,7 @@ import { AgGridReact } from 'ag-grid-react';
 import 'ag-grid/dist/styles/ag-grid.css';
 import 'ag-grid/dist/styles/ag-theme-balham.css';
 //import './submit-timesheet.styles.css'
+import "./styles.css";
 import moment from 'moment';
 
 import { NumberFormatter } from './NumberFormatter';
@@ -19,29 +20,29 @@ import { withRouter } from 'react-router-dom';
 class SubmitTimesheetTable extends React.Component {
   constructor(props) {
     super(props);
-    console.log(moment(this.props.dates[0]).format('YYYY-MM-DD'))
+    console.log(moment(props.dates[0]).format('YYYY-MM-DD'))
     let columns =[];
     columns.push({headerName: 'Project', field: 'project'})
     
-    this.props.dates.forEach(date => {
-      columns.push({headerName: moment(date).format('YYYY-MM-DD'), field: moment(date).format('YYYY-MM-DD'),cellEditor: 'numericCellEditor',editable: true,cellRenderer: 'numberFormatter',type: 'numericColumn' })
+    props.dates.forEach(date => {
+      columns.push({headerName: moment(date).format('YYYY-MM-DD'), field: moment(date).format('YYYY-MM-DD')})
 
     })
 
    
    
-    console.log(columns)
+    //console.log(columns)
  
     
 
     this.state = {
         columnDefs: columns,
-        rowData: [],
-        frameworkComponents: {
-            'numberFormatter': NumberFormatter,
-            'numericCellEditor': NumericCellEditor,
-            'rangeFilter': RangeFilter
-        }
+        rowData: []
+        // frameworkComponents: {
+        //     'numberFormatter': NumberFormatter,
+        //     'numericCellEditor': NumericCellEditor,
+        //     'rangeFilter': RangeFilter
+        // }
     }
 }
 componentDidMount() {
@@ -79,6 +80,17 @@ componentDidMount() {
 
 
 
+sizeToFit() {
+  this.gridApi.sizeColumnsToFit();
+}
+autoSizeAll() {
+  var allColumnIds = [];
+  this.gridColumnApi.getAllColumns().forEach(function(column) {
+    allColumnIds.push(column.colId);
+  });
+  this.gridColumnApi.autoSizeColumns(allColumnIds);
+}
+
 
   render(){
       return (
@@ -110,10 +122,17 @@ componentDidMount() {
     //         }}
     //         className="ag-theme-balham"
     //       >
-    <div
-                className="ag-theme-balham"
-                style={{height: '200px', width: '600px'}}
-            >
+    <div style={{ width: "100%", height: "100%" }}>
+    <div class="grid-wrapper">
+      <div
+        id="myGrid"
+        style={{
+          boxSizing: "border-box",
+          height: "100%",
+          width: "100%"
+        }}
+        className="ag-theme-balham"
+      >
             <AgGridReact
                     enableSorting={true}
                     enableFilter={true}
@@ -123,6 +142,9 @@ componentDidMount() {
                     rowData={this.state.rowData}>
             </AgGridReact>
             </div>
+        </div>
+
+      </div>
     //       </div>
     //     </div>
     //   </div>

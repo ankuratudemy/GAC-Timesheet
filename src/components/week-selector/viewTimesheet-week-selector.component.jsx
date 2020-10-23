@@ -6,8 +6,9 @@ import DayPicker from 'react-day-picker';
 import 'react-day-picker/lib/style.css';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
+import { selectCurrentUser } from '../../redux/user/user.selectors';
 import { selectSelectedDays,selectHoverRange,selectWeekNumber} from '../../redux/view-timesheet/view-timesheet.selectors'
-import { setSelectedDays,setHoverRange,setWeekNumber } from '../../redux/view-timesheet/view-timesheet.actions';
+import { setSelectedDays,setHoverRange,setWeekNumber,setViewTSData } from '../../redux/view-timesheet/view-timesheet.actions';
 moment.locale('uk', {
   week: {
     dow: 1,
@@ -67,6 +68,7 @@ class ViewWeekSelector extends React.Component {
     console.log(year_week[1])
     this.props.setWeekNumber(year_week[1]);
     this.props.setHoverRange(getWeekRange(date))
+    this.props.setViewTSData(this.props.userid.UserId)
     
   };
 
@@ -189,13 +191,15 @@ class ViewWeekSelector extends React.Component {
 const mapStateToProps = createStructuredSelector({
   selectedDays: selectSelectedDays,
   hoverRange: selectHoverRange,
-  weekNumber: selectWeekNumber
+  weekNumber: selectWeekNumber,
+  userid: selectCurrentUser 
 });
 
 const mapDispatchToProps = dispatch => ({
   setSelectedDays: selectedDays => dispatch(setSelectedDays(selectedDays)),
   setHoverRange: hoverRange => dispatch(setHoverRange(hoverRange)),
-  setWeekNumber: weekNumber => dispatch(setWeekNumber(weekNumber))
+  setWeekNumber: weekNumber => dispatch(setWeekNumber(weekNumber)),
+  setViewTSData: userid => dispatch(setViewTSData(userid))
   
 });
 

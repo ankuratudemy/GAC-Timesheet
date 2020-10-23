@@ -15,3 +15,21 @@ export const makePostCall = (path,payload) => {
       throw error;
     });
 };
+
+
+export const makeGetCall = (path,queryParams) => {
+  const URL = 'http://iis.srivensolutions.com:8088'+path;
+  console.log(URL)
+  return axios(URL, {
+    method: 'GET',
+    headers: {
+      'content-type': 'application/json', // whatever you want
+    },
+    params: queryParams
+
+  })
+    .then(response => response.data)
+    .catch(error => {
+      throw error;
+    });
+};

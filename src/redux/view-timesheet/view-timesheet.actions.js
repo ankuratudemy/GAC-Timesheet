@@ -20,8 +20,10 @@ export const setWeekNumber = weekNumber => ({
   payload: weekNumber
 });
 
-export const setTimesheetData = timesheetData => ({
-  type: ViewTimesheetActionTypes.SET_TIMESHEET_DATA,
-  payload: timesheetData
+
+
+export const setViewTSData = userid => ({
+  type: ViewTimesheetActionTypes.SET_VIEWTS_DATA,
+  payload: userid
 });
 

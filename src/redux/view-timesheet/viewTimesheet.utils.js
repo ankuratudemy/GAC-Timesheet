@@ -1,3 +1,6 @@
+import {makeGetCall} from '../../firebase/user.utils'
+
+
 export const addItemToCart = (cartItems, cartItemToAdd) => {
   const existingCartItem = cartItems.find(
     cartItem => cartItem.id === cartItemToAdd.id
@@ -31,10 +34,12 @@ export const removeItemFromCart = (cartItems, cartItemToRemove) => {
 };
 
 
-export const getViewTSData = (selectedDays, userid) => {
 
-  console.log("###Received action GetViewTSDATA## :\n"+ selectedDays + userid)
-
-  
-  return [];
-};
+export const getViewTSData = (url,params) => {
+  return new Promise((resolve, reject) => {
+   console.log( "##params: " +params+ " ##URL "+ url)
+    let result =  makeGetCall(url,params);
+    console.log(result);
+  resolve(result)
+})
+}

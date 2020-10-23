@@ -27,11 +27,7 @@ const mapStateToProps = createStructuredSelector({
   hoverRange: selectHoverRange
 });
 
-// const mapDispatchToProps = dispatch => ({
-//   setSelectedDays: selectedDays => dispatch(setSelectedDays(selectedDays)),
-//   setHoverRange: hoverRange => dispatch(setHoverRange(hoverRange))
-  
-// });
+
 
 export default withRouter(connect(
   mapStateToProps

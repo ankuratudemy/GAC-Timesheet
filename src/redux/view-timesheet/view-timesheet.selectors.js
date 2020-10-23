@@ -32,7 +32,7 @@ export const selectTimesheetData = createSelector(
 
 export const selectViewTSData = createSelector(
   [selectViewTimesheet],
-  viewTimesheet => viewTimesheet.viewTSDATA
+  viewTimesheet => viewTimesheet.viewTSData
 );
 
 

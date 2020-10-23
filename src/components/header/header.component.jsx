@@ -3,13 +3,11 @@ import { connect } from 'react-redux';
 import {compose} from 'redux'
 import { createStructuredSelector } from 'reselect';
 import { withRouter } from 'react-router-dom';
-import { auth } from '../../firebase/firebase.utils';
-import CartIcon from '../cart-icon/cart-icon.component';
-import CartDropdown from '../cart-dropdown/cart-dropdown.component';
+
 import { selectCartHidden } from '../../redux/cart/cart.selectors';
 import { selectCurrentUser } from '../../redux/user/user.selectors';
 import { logoutUser } from '../../redux/user/user.actions';
-import { ReactComponent as Logo } from '../../assets/crown.svg';
+
 
 import {
   HeaderContainer,
@@ -35,7 +33,7 @@ const Header = ({history, currentUser, hidden,logoutUser }) => {
       <Logo className='logo' />
     </LogoContainer> */}
     <OptionsContainer>
-      {/* <OptionLink to='/my-timesheet'>My Timesheet</OptionLink> */}
+
       <OptionLink to='/'>Home</OptionLink>
       <OptionLink onMouseEnter={toggling} onMouseLeave={toggling} >
       Timesheet

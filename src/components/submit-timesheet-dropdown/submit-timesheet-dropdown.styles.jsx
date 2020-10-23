@@ -3,8 +3,8 @@ import styled from 'styled-components';
 
 export const SubmitTimesheetDropdownContainer = styled.div`
   position: initial;
-  width: 240px;
-  height: 340px;
+  width: 100%;
+  height: 100%;
   display: flex;
   flex-direction: inline;
   padding: 20px;

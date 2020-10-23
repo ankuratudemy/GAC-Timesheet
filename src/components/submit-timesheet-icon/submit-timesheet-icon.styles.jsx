@@ -4,7 +4,7 @@ import { ReactComponent as ShoppingIconSVG } from '../../assets/icons8-calendar.
 
 export const SubmitTimesheetContainer = styled.div`
 
-  display: content;
+  display: inline-grid;
   flex-direction: row;
   position: relative;
   cursor: pointer;
