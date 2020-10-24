@@ -3,6 +3,7 @@ import { AgGridColumn, AgGridReact } from 'ag-grid-react';
 import {makeGetCall} from '../../firebase/user.utils'
 import 'ag-grid-community/dist/styles/ag-grid.css';
 import 'ag-grid-community/dist/styles/ag-theme-alpine.css';
+import { ClientSideRowModelModule } from '@ag-grid-community/client-side-row-model';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { selectCurrentUser } from '../../redux/user/user.selectors';
@@ -18,6 +19,16 @@ const SubmitTimesheetTable = ({user,dates}) => {
     const [selectedDates,setSelectedDates] = useState(dates);
     const [rowData, setRowData] = useState([]);
     const [columnDefs,setColumnDefs] = useState([])
+    
+    const onGridReady = (params) => {
+      setGridApi(params.api);
+      setGridColumnApi(params.columnApi);
+    };
+
+    const onCellValueChanged = (event) => {
+      console.log('Data after change is', event.data);
+    };
+
     useEffect(() => {
       
       console.log("Dates##", dates)
@@ -89,9 +100,11 @@ const SubmitTimesheetTable = ({user,dates}) => {
             >
  
               <AgGridReact
-
+                      modules={[ClientSideRowModelModule]}
                       columnDefs={columnDefs}
-                      rowData={rowData}>
+                      rowData={rowData}
+                      onGridReady={onGridReady}
+                      onCellValueChanged={onCellValueChanged}>
               </AgGridReact>
               
             </div>
