@@ -12,7 +12,7 @@ import { useEffect } from 'react';
 import WithSpinner from '../with-spinner/with-spinner.component'
 import {selectSubmitSelectedDays} from '../../redux/submit-timesheet/submit-timesheet.selectors'
 import moment from 'moment';
-import  NumericCellEditor  from './NumericEditor';
+//import  NumericCellEditor  from './NumericEditor';
 
 const SubmitTimesheetTable = ({user,dates}) => {
     
@@ -21,11 +21,11 @@ const SubmitTimesheetTable = ({user,dates}) => {
     const [selectedDates,setSelectedDates] = useState(dates);
     const [rowData, setRowData] = useState([]);
     const [columnDefs,setColumnDefs] = useState([])
-    const frameworkComponents = {
+    // const frameworkComponents = {
 
-          'numericCellEditor': NumericCellEditor,
+    //       'numericCellEditor': NumericCellEditor,
 
-       }
+    //    }
     
 
     const onGridReady = (params) => { 
@@ -40,7 +40,9 @@ const SubmitTimesheetTable = ({user,dates}) => {
       console.log('Data after change is', event);
     };
 
-   
+    const onCellValueChanged = (event) => {
+      console.log('Data after change is', event);
+    };
 
     useEffect(() => {
       
@@ -49,7 +51,7 @@ const SubmitTimesheetTable = ({user,dates}) => {
       let rows = []
       columns.push({headerName: 'Project', field: 'project', width:150})
       dates.forEach(date => {
-      columns.push({headerName: moment(date).format('YYYY-MM-DD'), field: moment(date).format('YYYY-MM-DD'),width:110, editable: true, cellEditor: 'numericCellEditor' })
+      columns.push({headerName: moment(date).format('YYYY-MM-DD'), field: moment(date).format('YYYY-MM-DD'),width:110, editable: true })
 
        })
       setColumnDefs(columns)
@@ -124,7 +126,7 @@ const SubmitTimesheetTable = ({user,dates}) => {
                       onCellEditingStopped={function (event) {
                         console.log('cellEditingStopped');
                       }}
-                      frameworkComponents={frameworkComponents}
+                      //frameworkComponents={frameworkComponents}
                      >
                       
               </AgGridReact>
