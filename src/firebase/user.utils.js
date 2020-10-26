@@ -33,3 +33,20 @@ export const makeGetCall = (path,queryParams) => {
       throw error;
     });
 };
+
+export const makeNoParamGetCall = (path) => {
+  const URL = 'http://iis.srivensolutions.com:8088'+path;
+  console.log(URL)
+  return axios(URL, {
+    method: 'GET',
+    headers: {
+      'content-type': 'application/json', // whatever you want
+    }
+    
+
+  })
+    .then(response => response.data)
+    .catch(error => {
+      throw error;
+    });
+};

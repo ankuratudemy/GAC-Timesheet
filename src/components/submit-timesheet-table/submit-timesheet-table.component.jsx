@@ -13,12 +13,15 @@ import WithSpinner from '../with-spinner/with-spinner.component'
 import {selectSubmitSelectedDays} from '../../redux/submit-timesheet/submit-timesheet.selectors'
 import moment from 'moment';
 import  NumericCellEditor  from './NumericEditor';
+import {SubmitTimesheetButton,ButtonsBarContainer} from './button.styles'
+import { GridApi } from 'ag-grid-community';
 
 const SubmitTimesheetTable = ({user,dates}) => {
     
     const [gridApi, setGridApi] = useState(null);
     const [gridColumnApi, setGridColumnApi] = useState(null);
     const [selectedDates,setSelectedDates] = useState(dates);
+    const [totalHours,setTotalHours] = useState(0);
     const [rowData, setRowData] = useState([]);
     const [columnDefs,setColumnDefs] = useState([])
     const frameworkComponents = {
@@ -36,11 +39,52 @@ const SubmitTimesheetTable = ({user,dates}) => {
 
 
 
-    const onCellValueChanged = (event) => {
+  const onCellValueChanged = (event) => {
+      
       console.log('Data after change is', event);
+      let allRowsData = [];
+
+
+//gridColumnApi.setColumnAggFunc(event.column.colId, 'sum')
+console.log(event.column.colId)
+
+
+gridApi.forEachNode(node => allRowsData.push(node.data));
+        
+    console.log(allRowsData)
+ let totalHours = 0;
+ let columnSum =0;
+  allRowsData.forEach(row =>{
+   
+  
+    for (const [key, value] of Object.entries(row)) {
+      if(key !== "project"){
+      console.log(typeof value);
+      totalHours = totalHours + parseInt(value);
+      }
+      if(key === event.column.colId){
+      columnSum = columnSum + parseInt(value)
+      
+      }
+    }
+
+  })
+  console.log("Total Hours: ", totalHours)
+  console.log("Column Sum: ",columnSum)
+  if(columnSum > 8){
+    event.rowNode.setDatavalue(event.column.coldId,event.oldvalue)
+  }
+  else{
+  setTotalHours(totalHours)
+  }
+
+
     };
 
-   
+  
+   const submitTotalHours = () =>{
+     alert("Submitted total hours")
+   }
 
     useEffect(() => {
       
@@ -75,6 +119,7 @@ const SubmitTimesheetTable = ({user,dates}) => {
         rows.push(o);
       })
       setRowData(rows)
+      setTotalHours(0)
       }
 
        fetchData();
@@ -88,25 +133,18 @@ const SubmitTimesheetTable = ({user,dates}) => {
       style={{
         width: '100%',
         height: 'auto',
-        display: 'flex',
+        display: 'inherit',
         flexDirection: 'column',
         justifyContent: 'space-between',
       }}
       >
         <div className="example-wrapper">
-          <div
-            style={{
-              marginBottom: '5px',
-              display: 'flex',
-              justifyContent: 'space-between',
-            }}
-          >
-          </div>
+
           <div className="grid-wrapper">
             <div
               id="myGrid"
               style={{
-                height: '100%',
+                
                 width: '100%',
               }}
               className="ag-theme-alpine"
@@ -125,9 +163,23 @@ const SubmitTimesheetTable = ({user,dates}) => {
                         console.log('cellEditingStopped');
                       }}
                       frameworkComponents={frameworkComponents}
+                      domLayout='autoHeight'
                      >
                       
               </AgGridReact>
+              
+              <form onSubmit={submitTotalHours}>
+               <div>
+                  <span style={{fontSize: '15px'}}>Total Hours: {totalHours}</span>
+                  <ButtonsBarContainer>
+                     <SubmitTimesheetButton type='submit' onClick={()=>submitTotalHours()}> Submit </SubmitTimesheetButton>
+            
+                 </ButtonsBarContainer>
+               </div>
+      </form>
+             
+
+
               
             </div>
           </div>

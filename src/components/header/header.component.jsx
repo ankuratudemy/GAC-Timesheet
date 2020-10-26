@@ -48,7 +48,7 @@ const Header = ({history, currentUser, hidden,logoutUser }) => {
         )}
       </OptionLink>
       <OptionLink to='/shop'>Approve Timesheets</OptionLink>
-      <OptionLink to='/shop'>Assign Projects</OptionLink>
+      <OptionLink to='/assignproject'>Assign Projects</OptionLink>
       <OptionLink to='/shop'>Dashboard</OptionLink>
       {/* {currentUser ? (
         <OptionLink as='div' onClick={() => auth.signOut()}>

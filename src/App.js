@@ -10,7 +10,7 @@ import Timesheet from './pages/Timesheet/timesheet.component'
 import ShopPage from './pages/shop/shop.component';
 import SignInAndSignUpPage from './pages/sign-in-and-sign-up/sign-in-and-sign-up.component';
 import CheckoutPage from './pages/checkout/checkout.component';
-
+import AssignProject from './components/assign-project/assign-project.component'
 import Header from './components/header/header.component';
 
 
@@ -37,6 +37,7 @@ class App extends React.Component {
           <Route path='/my-timesheet' render={() => this.props.currentUser ? (<Timesheet />) :(<SignInAndSignUpPage />)} />
           <Route path='/shop' render={() => this.props.currentUser ? (<HomePage />) :(<SignInAndSignUpPage />)}  />
           <Route exact path='/checkout' render={() => this.props.currentUser ? (<HomePage />) :(<SignInAndSignUpPage />)}  />
+          <Route exact path='/assignproject' render={() => this.props.currentUser ? (<AssignProject />) :(<SignInAndSignUpPage />)}  />
 
           <Route exact path='/signin'   render={() => this.props.currentUser ? ( <Redirect to='/my-timesheet' />
               ) : (
