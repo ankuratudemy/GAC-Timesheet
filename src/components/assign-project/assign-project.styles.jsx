@@ -36,7 +36,18 @@ export const DropdownBarContainer = styled.div`
 `;
 
 export const CapturedvaluesContainer = styled.div`
-  display: flex;
-  justify-content: left;
-  background-color: #016879;
+display: flex;
+color: white;
+background-color: #016879;
+justify-content: left;
+
+height: 40px;
+width: fit-content;
+
+margin-bottom: 1px;
+margin-top: 1px;
+background-color: #016879;
+position: fixed;
+bottom: 20%;
+
 `;

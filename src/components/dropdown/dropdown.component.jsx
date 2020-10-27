@@ -1,36 +1,43 @@
-import React, { Component } from 'react';
+import React from "react";
+import Button from "./button";
+import DropDownCard from "../dropdown-card/dropdown-card.component";
+// const sampleData = new Array(7).fill("item name");
+ const Dropdown = ({data,name,handleInputChange}) => {
 
-class SelectOption extends Component {
-    render() {
-        return (
-            <option value={this.props.dataItem.key}>{this.props.dataItem}</option>
-        )
+  const [open, setOpen] = React.useState(false);
+  const drop = React.useRef(null);
+
+  function handleClick(e) {
+    console.log("Event1",e)
+    if (!e.target.closest(`.${drop.current.className}`) && open) {
+      setOpen(false);
     }
-}
+  } 
+  React.useEffect(() => {
+    document.addEventListener("click", handleClick);
+    return () => {
+      document.removeEventListener("click", handleClick);
+    };
+  });
 
-class Dropdown extends Component {
 
-    render() {
+  return (
 
-        let options = [];
-       
-        console.log(this.props.selectableData)
-        if (this.props.selectableData) {
-            const selectableData = this.props.selectableData;
-            options = selectableData.map((dataItem) =>
-                <SelectOption key={'option_' + dataItem} dataItem={dataItem} />
-            );
-            console.log(options)
-        }
-
-        return (
-            <div style={{margin: "auto"}}>
-                <select style={{margin: "10px", backgroundColor: '#016879', color: 'white', fontSize: "20px", fontFamily: 'Open Sans Condensed', borderWidth: '0px'}} onChange={this.props.handleInputChange} name={this.props.name} >
-                    {options}
-                </select>
-            </div>
-        )
-    }
-}
+  
+    <div
+      className="dropdown"
+      ref={drop}
+      style={{
+        position: "relative",
+        margin: "16px",
+        width: "auto",
+        display: "inline-block"
+      }}
+    >
+      <Button name={name}  onClick={() => setOpen(open => !open)} />
+      {open && <DropDownCard name={name} handleInputChange={handleInputChange} data={data} setOpen={setOpen} />}
+    </div>
+  );
+};
 
 export default Dropdown;
