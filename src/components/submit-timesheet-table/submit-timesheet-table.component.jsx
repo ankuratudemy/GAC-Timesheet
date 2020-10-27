@@ -51,15 +51,15 @@ console.log(event.column.colId)
 
 gridApi.forEachNode(node => allRowsData.push(node.data));
         
-    console.log(allRowsData)
+console.log(allRowsData)
  let totalHours = 0;
  let columnSum =0;
-  allRowsData.forEach(row =>{
+allRowsData.forEach(row =>{
    
   
     for (const [key, value] of Object.entries(row)) {
       if(key !== "project"){
-      console.log(typeof value);
+      //console.log(typeof value);
       totalHours = totalHours + parseInt(value);
       }
       if(key === event.column.colId){
@@ -72,7 +72,8 @@ gridApi.forEachNode(node => allRowsData.push(node.data));
   console.log("Total Hours: ", totalHours)
   console.log("Column Sum: ",columnSum)
   if(columnSum > 8){
-    event.rowNode.setDatavalue(event.column.coldId,event.oldvalue)
+    let rowNode = gridApi.getRowNode(event.node.id);
+    rowNode.setDataValue(event.column.colId,event.oldValue)
   }
   else{
   setTotalHours(totalHours)
