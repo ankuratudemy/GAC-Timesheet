@@ -8,6 +8,7 @@ const StartDate =({handleDatePick,name}) => {
 
     const ExampleCustomInput = ({ value, onClick }) => (
         <div style={{
+            display: 'flex',
             position: "relative",
             margin: "16px",
             width: "auto",
@@ -22,7 +23,8 @@ const StartDate =({handleDatePick,name}) => {
       <DatePicker
         selected={startDate}
         onChange={date => handleDatePick(date)}
-        customInput={<ExampleCustomInput value={name} />}
+        customInput={<ExampleCustomInput value={name} 
+        />}
       />
     );
   };

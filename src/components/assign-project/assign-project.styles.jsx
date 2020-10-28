@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import CustomButton from '../custom-button/custom-button.component';
 
 export const AssignProjectContainer = styled.div`
 
@@ -37,6 +38,7 @@ export const DropdownBarContainer = styled.div`
 
 export const CapturedvaluesContainer = styled.div`
 display: flex;
+align-items: center;
 color: white;
 background-color: #016879;
 justify-content: left;
@@ -50,4 +52,20 @@ background-color: #016879;
 position: fixed;
 bottom: 20%;
 
+`;
+
+export const AssignProjectButton = styled(CustomButton)`
+width: 60%;
+height: 75%
+margin-top: 5px;
+margin-bottom: 5px;
+display: flex;
+font-size: 20px;
+margin-right: 25px;
+min-width: 70px;
+  width: 70px;
+  align-items: right;  
+  letter-spacing: 2px;
+  line-height: 30px;
+  text-transform: none;
 `;

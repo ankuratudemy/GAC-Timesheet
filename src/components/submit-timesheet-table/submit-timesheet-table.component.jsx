@@ -15,6 +15,7 @@ import moment from 'moment';
 import  NumericCellEditor  from './NumericEditor';
 import {SubmitTimesheetButton,ButtonsBarContainer} from './button.styles'
 import { GridApi } from 'ag-grid-community';
+import Alert from 'react-bootstrap/Alert'
 
 const SubmitTimesheetTable = ({user,dates}) => {
     
@@ -23,7 +24,11 @@ const SubmitTimesheetTable = ({user,dates}) => {
     const [selectedDates,setSelectedDates] = useState(dates);
     const [totalHours,setTotalHours] = useState(0);
     const [rowData, setRowData] = useState([]);
-    const [columnDefs,setColumnDefs] = useState([])
+    const [columnDefs,setColumnDefs] = useState([]);
+    const [showAlert,setShowAlert] = useState(false);
+    const [show, setShow] = useState(true);
+    const [alertMessage, setAlertMessage] = useState(null);
+    var alertMessages='';
     const frameworkComponents = {
 
           'numericCellEditor': NumericCellEditor,
@@ -71,9 +76,14 @@ allRowsData.forEach(row =>{
   })
   console.log("Total Hours: ", totalHours)
   console.log("Column Sum: ",columnSum)
-  if(columnSum > 8){
+  if(columnSum > 8 || totalHours >40){
+    
     let rowNode = gridApi.getRowNode(event.node.id);
     rowNode.setDataValue(event.column.colId,event.oldValue)
+    setAlertMessage('Total Hours for week cannot be greater than 40.\nTotal hours for one day cannot be greater than 8');
+    setShow(true)
+    setShowAlert(true)
+
   }
   else{
   setTotalHours(totalHours)
@@ -84,7 +94,7 @@ allRowsData.forEach(row =>{
 
   
    const submitTotalHours = () =>{
-     alert("Submitted total hours")
+     
    }
 
     useEffect(() => {
@@ -134,7 +144,7 @@ allRowsData.forEach(row =>{
       style={{
         width: '100%',
         height: 'auto',
-        display: 'inherit',
+        
         flexDirection: 'column',
         justifyContent: 'space-between',
       }}
@@ -168,6 +178,12 @@ allRowsData.forEach(row =>{
                      >
                       
               </AgGridReact>
+              {showAlert ? (<Alert variant="danger"  show={show} onClose={() =>{setShow(false);setAlertMessage(null);setShowAlert(false)}} dismissible>
+               <Alert.Heading>Oh snap! You got an error!</Alert.Heading>
+          <p>
+               {alertMessage}
+          </p>
+             </Alert>):(null)}
               
               <form onSubmit={submitTotalHours}>
                <div>

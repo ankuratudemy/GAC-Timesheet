@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import {Route, withRouter} from 'react-router-dom';
 import Dropdown from '../dropdown/dropdown.component';
-import {AssignProjectContainer,DropdownBarContainer,CapturedvaluesContainer} from './assign-project.styles'
+import {AssignProjectContainer,DropdownBarContainer,CapturedvaluesContainer,AssignProjectButton} from './assign-project.styles'
 import {makeNoParamGetCall} from '../../firebase/user.utils'
 import StartDate from '../start-date-picker/start-date-picker.component'
 import moment from 'moment'
@@ -116,7 +116,11 @@ class AssignProject extends Component {
             endDate: date
         })
     }
+    submitAssignProject = () => {
 
+        console.log("Submitted values")
+
+    }
 
     render() {
         return (
@@ -164,11 +168,12 @@ class AssignProject extends Component {
 
             </DropdownBarContainer> 
             <CapturedvaluesContainer>
-            <span style={{marginRight: '20px', fontSize: '15px', fontWeight: 'bold',borderRight: 'solid', paddingRight: '5px'}}>{this.state.project ? 'Project: '+ this.state.project : null}</span>
-            <span style={{marginRight: '2px', fontSize: '15px', fontWeight: 'bold',borderRight: 'solid', paddingRight: '5px'}}>{this.state.employee ? 'Employee: '+ this.state.employee : null} </span>
-            <span style={{marginRight: '2px', fontSize: '15px', fontWeight: 'bold',borderRight: 'solid', paddingRight: '5px'}}>{this.state.capacity ? 'Capacity: '+ this.state.capacity : null} </span>
-            <span style={{marginRight: '2px', fontSize: '15px', fontWeight: 'bold',borderRight: 'solid', paddingRight: '5px'}}>{this.state.startDate ? 'Start Date: '+ moment(this.state.startDate).format('MMM DD YYYY') : null} </span>
-            <span style={{marginRight: '2px', fontSize: '15px', fontWeight: 'bold',borderRight: 'solid', paddingRight: '5px'}}>{this.state.endDate ? 'End Date: '+ moment(this.state.endDate).format('MMM DD YYYY') : null} </span>
+            <span style={{marginRight: '2px', marginLeft: '2px', fontSize: '15px', fontWeight: 'bold',borderRight: 'solid', paddingRight: '5px'}}>{this.state.project ? 'Project: '+ this.state.project : null}</span>
+            <span style={{marginRight: '2px', marginLeft: '2px', fontSize: '15px', fontWeight: 'bold',borderRight: 'solid', paddingRight: '5px'}}>{this.state.employee ? 'Employee: '+ this.state.employee : null} </span>
+            <span style={{marginRight: '2px', marginLeft: '2px', fontSize: '15px', fontWeight: 'bold',borderRight: 'solid', paddingRight: '5px'}}>{this.state.capacity ? 'Capacity: '+ this.state.capacity : null} </span>
+            <span style={{marginRight: '2px',  marginLeft: '2px',fontSize: '15px', fontWeight: 'bold',borderRight: 'solid', paddingRight: '5px'}}>{this.state.startDate ? 'Start Date: '+ moment(this.state.startDate).format('MMM DD YYYY') : null} </span>
+            <span style={{marginRight: '2px',  marginLeft: '2px',fontSize: '15px', fontWeight: 'bold',borderRight: 'solid', paddingRight: '5px'}}>{this.state.endDate ? 'End Date: '+ moment(this.state.endDate).format('MMM DD YYYY') : null} </span>
+            <AssignProjectButton  disabled={!this.state.project || !this.state.startDate || !this.state.employee || !this.state.endDate || !this.state.capacity} type='submit' onClick={()=>this.submitAssignProject()}> Submit </AssignProjectButton>
 
 
             </CapturedvaluesContainer>
