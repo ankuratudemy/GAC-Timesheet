@@ -1,6 +1,6 @@
 
 import React from 'react'
-import {SubmitTimesheetButton} from './button.styles'
+import {ApproveTimesheetButton} from './button.styles'
 class BtnCellRenderer extends React.Component {
     constructor(props) {
       super(props);
@@ -12,7 +12,7 @@ class BtnCellRenderer extends React.Component {
     }
     render() {
       return (
-        <SubmitTimesheetButton type='submit' onClick={this.btnClickedHandler}> Approve </SubmitTimesheetButton>
+        <ApproveTimesheetButton type='submit' onClick={this.btnClickedHandler}> Approve </ApproveTimesheetButton>
 
         
       )

@@ -33,9 +33,10 @@ const ViewTimesheetTable = ({user}) => {
     
     return (
          
-        <div className="ag-theme-alpine" style={ { display: 'inline-table', height: 200, width: 1100 } }>
+        <div className="ag-theme-alpine" style={ { padding: '20px',display: 'inline-table', height: 'auto', width: '100%' } }>
            {rowData? ( <AgGridReact
-                rowData={rowData}>
+                rowData={rowData}
+                domLayout='autoHeight'>
                 <AgGridColumn field="SvsId"></AgGridColumn>
                 <AgGridColumn field="WeekNumber"></AgGridColumn>
                 <AgGridColumn field="WeekEndDate"></AgGridColumn>

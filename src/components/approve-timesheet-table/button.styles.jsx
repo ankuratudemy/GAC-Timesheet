@@ -8,13 +8,13 @@ export const ButtonsBarContainer = styled.div`
   background-color: #016879;
 `;
 
-export const SubmitTimesheetButton = styled(CustomButton)`
+export const ApproveTimesheetButton = styled(CustomButton)`
 width: 60%;
 height: 50%
 margin-top: 5px;
 margin-bottom: 5px;
 display: flex;
-font-size: 20px;
+font-size: 17px;
 margin-right: 25px;
 min-width: 70px;
   width: 70px;

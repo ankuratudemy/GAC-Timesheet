@@ -84,7 +84,7 @@ const ApproveTimesheetTable = ({user}) => {
     
     return (
          
-        <div className="ag-theme-alpine" style={ {margin:'2px', display: 'inline-table', width: '100%' } }>
+        <div className="ag-theme-alpine" style={ {padding: '20px', margin:'2px', display: 'inline-table', width: '100%' } }>
            {rowData? ( <AgGridReact
                 rowData={rowData}
                 columnDefs={columnDef}
