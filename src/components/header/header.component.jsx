@@ -27,6 +27,13 @@ import {
 const Header = ({history, currentUser, hidden,logoutUser }) => {
   const [isOpen, setIsOpen] = useState(false);
   const toggling = () => setIsOpen(!isOpen);
+  let homeIcon = require('../../assets/home.svg')
+  let timesheetIcon = require('../../assets/Timesheet.png')
+  let approveTimesheetIcon = require('../../assets/Approve Timesheet.png')
+  let assignProjectIcon = require('../../assets/Assign_Projects.png')
+  let dashboardIcon = require('../../assets/Dashboard.png')
+
+
   return (
   <HeaderContainer>
     {/* <LogoContainer to='/'>
@@ -34,9 +41,15 @@ const Header = ({history, currentUser, hidden,logoutUser }) => {
     </LogoContainer> */}
     <OptionsContainer>
 
-      <OptionLink to='/'>Home</OptionLink>
-      <OptionLink onMouseEnter={toggling} onMouseLeave={toggling} >
-      Timesheet
+      <OptionLink style={{display: 'flex', alignContent: 'space-between'}}  to='/'>
+        <div style={{paddingRight: '2px'}}>
+             <img width="15" height="15" src={homeIcon} />
+        </div>Home
+      </OptionLink>
+      <OptionLink  style={{display: 'flex' }}  onMouseEnter={toggling} onMouseLeave={toggling} >
+      <div style={{paddingRight: '2px'}}>
+             <img width="15" height="15" src={timesheetIcon} />
+        </div>Timesheet
       {isOpen && (
           <DropDownListContainer >
             <DropDownList>
@@ -47,9 +60,15 @@ const Header = ({history, currentUser, hidden,logoutUser }) => {
           </DropDownListContainer>
         )}
       </OptionLink>
-      <OptionLink to='/approve'>Approve Timesheets</OptionLink>
-      <OptionLink to='/assignproject'>Assign Projects</OptionLink>
-      <OptionLink to='/shop'>Dashboard</OptionLink>
+      <OptionLink style={{display: 'flex', alignContent: 'space-between'}} to='/approve'><div style={{paddingRight: '2px'}}>
+             <img width="15" height="15" src={approveTimesheetIcon} />
+        </div>Approve Timesheets</OptionLink>
+      <OptionLink style={{display: 'flex', alignContent: 'space-between'}} to='/assignproject'><div style={{paddingRight: '2px'}}>
+             <img width="15" height="15" src={assignProjectIcon} />
+        </div>Assign Projects</OptionLink>
+      <OptionLink style={{display: 'flex', alignContent: 'space-between'}} to='/shop'><div style={{paddingRight: '2px'}}>
+             <img width="15" height="15" src={dashboardIcon} />
+        </div>Dashboard</OptionLink>
       {/* {currentUser ? (
         <OptionLink as='div' onClick={() => auth.signOut()}>
           SIGN OUT
