@@ -47,7 +47,7 @@ const Header = ({history, currentUser, hidden,logoutUser }) => {
           </DropDownListContainer>
         )}
       </OptionLink>
-      <OptionLink to='/shop'>Approve Timesheets</OptionLink>
+      <OptionLink to='/approve'>Approve Timesheets</OptionLink>
       <OptionLink to='/assignproject'>Assign Projects</OptionLink>
       <OptionLink to='/shop'>Dashboard</OptionLink>
       {/* {currentUser ? (

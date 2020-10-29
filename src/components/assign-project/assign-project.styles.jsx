@@ -4,7 +4,8 @@ import CustomButton from '../custom-button/custom-button.component';
 export const AssignProjectContainer = styled.div`
 
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
+  width: fit-content;
   justify-content: bottom;
 
   

@@ -6,6 +6,8 @@ import {AssignProjectContainer,DropdownBarContainer,CapturedvaluesContainer,Assi
 import {makeNoParamGetCall} from '../../firebase/user.utils'
 import StartDate from '../start-date-picker/start-date-picker.component'
 import moment from 'moment'
+import Alert from 'react-bootstrap/Alert'
+
 class AssignProject extends Component {
     constructor() {
         super();
@@ -18,7 +20,11 @@ class AssignProject extends Component {
             startDate: null,
             endDate: null,
             resourceCapacity: ["25%","50%","75%","100%"],
-            capacity: null
+            capacity: null,
+            showError: false,
+            errorMessage: '',
+            successMessage: '',
+            showSuccess: ''
         };
     }
 
@@ -104,17 +110,31 @@ class AssignProject extends Component {
     }
 
     handleStartDatePick = (date) => {
-        
+
+        if(this.state.endDate && date >= this.state.endDate){
+            console.log("11")
+            this.setState({showError : true, errorMessage: 'End Date cannot be before Start Date !'})
+            
+        }
+        else{
         this.setState({
             startDate: date
         })
     }
+    }
 
     handleEndDatePick = (date) => {
-        
+
+        if(this.state.startDate && date <= this.state.startDate){
+            console.log("22")
+            this.setState({showError : true, errorMessage: 'End Date cannot be before Start Date !'})
+            
+        }
+        else{
         this.setState({
             endDate: date
         })
+    }
     }
     submitAssignProject = () => {
 
@@ -167,6 +187,14 @@ class AssignProject extends Component {
 
 
             </DropdownBarContainer> 
+            <div>
+            {this.state.showError ? (<Alert variant="danger"  show={this.state.showError} onClose={() =>{this.setState({showError: false, errorMessage:''})}} dismissible>
+               <Alert.Heading>Oh snap! You got an error!</Alert.Heading>
+          <p>
+               {this.state.errorMessage}
+          </p>
+             </Alert>):(null)}
+             </div>
             <CapturedvaluesContainer>
             <span style={{marginRight: '2px', marginLeft: '2px', fontSize: '15px', fontWeight: 'bold',borderRight: 'solid', paddingRight: '5px'}}>{this.state.project ? 'Project: '+ this.state.project : null}</span>
             <span style={{marginRight: '2px', marginLeft: '2px', fontSize: '15px', fontWeight: 'bold',borderRight: 'solid', paddingRight: '5px'}}>{this.state.employee ? 'Employee: '+ this.state.employee : null} </span>

@@ -9,7 +9,7 @@ import {makePostCall} from '../../firebase/user.utils'
 import { setCurrentUser } from '../../redux/user/user.actions';
 import { selectCurrentUser } from '../../redux/user/user.selectors';
 import WithSpinner from '../with-spinner/with-spinner.component'
-
+import Alert from 'react-bootstrap/Alert'
 import {
   SignInContainer,
   SignInTitle,
@@ -24,7 +24,10 @@ class SignIn extends React.Component {
     this.state = {
       email: '',
       password: '',
-      loading: false
+      loading: false,
+      showErrorMessage: false,
+      errorMessage: '',
+  
     };
   }
 
@@ -39,12 +42,18 @@ class SignIn extends React.Component {
       //setClientToken(data.token);
       //this.setState({isLoading: false, isAuthorized: true});
       console.log(data)
+      if(data.Status === "Success")
       this.props.setCurrentUser(data)
-      this.state({loading: false});
+
+      if(data.Status === "Fail"){
+      this.setState({showErrorMessage: true})
+      this.setState({errorMessage: data.Error})
+      }
+      this.setState({loading: false});
     };
 
     const onFailure = error => {
-      console.log(error && error.response);
+      console.log(error);
       //this.setState({errors: error.response.data, isLoading: false});
     };
 
@@ -74,8 +83,15 @@ class SignIn extends React.Component {
       this.state.loading ? (<SignInContainerWithSpinner isLoading={this.state.loading} />)
       :(
       <SignInContainer>
+       
+
         <SignInTitle>Welcome</SignInTitle>
-        
+        {this.state.showErrorMessage ? (<Alert variant="danger"  show={this.state.showErrorMessage} onClose={() =>{this.setState({showErrorMessage: false});this.setState({errorMessage: null});}} dismissible>
+               <Alert.Heading>Login failed!</Alert.Heading>
+          <p>
+               {this.state.errorMessage}
+          </p>
+             </Alert>):(null)}
         <form onSubmit={this.handleSubmit}>
           <FormInput
             name='email'
