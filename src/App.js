@@ -36,8 +36,8 @@ class App extends React.Component {
         <Switch>
           
           <Route path='/my-timesheet' render={() => this.props.currentUser ? (<Timesheet />) :(<SignInAndSignUpPage />)} />
-          <Route path='/shop' render={() => this.props.currentUser ? (<HomePage />) :(<SignInAndSignUpPage />)}  />
-          <Route exact path='/checkout' render={() => this.props.currentUser ? (<HomePage />) :(<SignInAndSignUpPage />)}  />
+          <Route path='/home' render={() => this.props.currentUser ? (<HomePage />) :(<SignInAndSignUpPage />)}  />
+          <Route exact path='/dashboard' render={() => this.props.currentUser ? (<HomePage />) :(<SignInAndSignUpPage />)}  />
           <Route exact path='/approve' render={() => this.props.currentUser ? (<ApproveTimesheetTable />) :(<SignInAndSignUpPage />)}  />
 
           <Route exact path='/assignproject' render={() => this.props.currentUser ? (<AssignProject />) :(<SignInAndSignUpPage />)}  />

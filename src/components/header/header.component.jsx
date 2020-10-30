@@ -46,10 +46,10 @@ const Header = ({history, currentUser, hidden,logoutUser }) => {
              <img width="15" height="15" src={homeIcon} />
         </div>Home
       </OptionLink>
-      <OptionLink  style={{display: 'flex' }}  onMouseEnter={toggling} onMouseLeave={toggling} >
+      <OptionLink  style={{display: 'flex', flexDirection: 'column' }}  onMouseEnter={toggling}  onMouseLeave={toggling} >
       <div style={{paddingRight: '2px'}}>
-             <img width="15" height="15" src={timesheetIcon} />
-        </div>Timesheet
+             <img width="15" height="15" src={timesheetIcon} />Timesheet
+        </div>
       {isOpen && (
           <DropDownListContainer >
             <DropDownList>
@@ -66,7 +66,7 @@ const Header = ({history, currentUser, hidden,logoutUser }) => {
       <OptionLink style={{display: 'flex', alignContent: 'space-between'}} to='/assignproject'><div style={{paddingRight: '2px'}}>
              <img width="15" height="15" src={assignProjectIcon} />
         </div>Assign Projects</OptionLink>
-      <OptionLink style={{display: 'flex', alignContent: 'space-between'}} to='/shop'><div style={{paddingRight: '2px'}}>
+      <OptionLink style={{display: 'flex', alignContent: 'space-between'}} to='/dashboard'><div style={{paddingRight: '2px'}}>
              <img width="15" height="15" src={dashboardIcon} />
         </div>Dashboard</OptionLink>
       {/* {currentUser ? (

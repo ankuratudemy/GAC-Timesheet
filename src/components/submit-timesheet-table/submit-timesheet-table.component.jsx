@@ -17,6 +17,8 @@ import {SubmitTimesheetButton,ButtonsBarContainer} from './button.styles'
 import { GridApi } from 'ag-grid-community';
 import Alert from 'react-bootstrap/Alert'
 
+const ButtonsBarContainerWithSpinner = WithSpinner(ButtonsBarContainer);
+
 const SubmitTimesheetTable = ({user,dates}) => {
     
     const [gridApi, setGridApi] = useState(null);
@@ -28,6 +30,7 @@ const SubmitTimesheetTable = ({user,dates}) => {
     const [showAlert,setShowAlert] = useState(false);
     const [show, setShow] = useState(true);
     const [alertMessage, setAlertMessage] = useState(null);
+    const [loading,setLoading] = useState(false);
     var alertMessages='';
     const frameworkComponents = {
 
@@ -94,11 +97,13 @@ allRowsData.forEach(row =>{
 
   
    const submitTotalHours = () =>{
+
      
    }
 
     useEffect(() => {
       
+      setLoading(true)
       console.log("Dates##", dates)
       let columns =[];
       let rows = []
@@ -128,9 +133,12 @@ allRowsData.forEach(row =>{
         })
 
         rows.push(o);
+        setLoading(false)
       })
       setRowData(rows)
       setTotalHours(0)
+      
+
       }
 
        fetchData();
@@ -139,7 +147,8 @@ allRowsData.forEach(row =>{
     },[dates])
   
     return (
-
+       
+      loading ? (<ButtonsBarContainerWithSpinner isLoading={loading} />):(
       <div 
       style={{
         width: '100%',
@@ -202,6 +211,7 @@ allRowsData.forEach(row =>{
           </div>
         </div>
       </div>
+    )
     );    
     
 };

@@ -8,6 +8,10 @@ import StartDate from '../start-date-picker/start-date-picker.component'
 import moment from 'moment'
 import Alert from 'react-bootstrap/Alert'
 
+import WithSpinner from '../with-spinner/with-spinner.component'
+
+const AssignProjectContainerWithSpinner = WithSpinner(AssignProjectContainer);
+
 class AssignProject extends Component {
     constructor() {
         super();
@@ -24,11 +28,13 @@ class AssignProject extends Component {
             showError: false,
             errorMessage: '',
             successMessage: '',
-            showSuccess: ''
+            showSuccess: '',
+            loading: true
         };
     }
 
     componentDidMount() {
+       
         let employeeList = [];
         let projectList =[];
         
@@ -62,12 +68,14 @@ class AssignProject extends Component {
                 projectLists: projectList,
           
         });
+        this.setState({loading: false});
         
     }
 
 
     getEmployeeData();
     getProjectList();
+    
 }
 
     handleInputChange = (e) => {
@@ -144,6 +152,8 @@ class AssignProject extends Component {
 
     render() {
         return (
+         this.state.loading ? (<AssignProjectContainerWithSpinner isLoading= {this.state.loading} />)
+                :(
            <AssignProjectContainer>
             <DropdownBarContainer>
                     
@@ -168,24 +178,6 @@ class AssignProject extends Component {
 
 
 
-
-{/* <Dropdown
-    name="SecondDropdown"
-    selectableData={ajaxResultSecond}
-    handleInputChange={this.handleInputChange}
-/>
-<Dropdown
-    name="ThirdDropdown"
-    selectableData={ajaxResultThird}
-    handleInputChange={this.handleInputChange}
-/>
-<Dropdown
-    name="FourthDropdown"
-    selectableData={ajaxResultFourth}
-    handleInputChange={this.handleInputChange}
-/> */}
-
-
             </DropdownBarContainer> 
             <div>
             {this.state.showError ? (<Alert variant="danger"  show={this.state.showError} onClose={() =>{this.setState({showError: false, errorMessage:''})}} dismissible>
@@ -206,8 +198,9 @@ class AssignProject extends Component {
 
             </CapturedvaluesContainer>
             </AssignProjectContainer> 
-        );
-    }
+        )
+        )
+}
 }
 
 export default AssignProject;

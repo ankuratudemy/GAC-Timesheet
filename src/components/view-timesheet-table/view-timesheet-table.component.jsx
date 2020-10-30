@@ -9,9 +9,10 @@ import { selectViewTSData} from '../../redux/view-timesheet/view-timesheet.selec
 import { selectCurrentUser } from '../../redux/user/user.selectors';
 import {setViewTSData} from '../../redux/view-timesheet/view-timesheet.actions'
 import { useEffect } from 'react';
+import {ViewTimesheetProxyContainerForWithSpinner} from './view-timesheet-table.styles'
 import WithSpinner from '../with-spinner/with-spinner.component'
 
-
+const ViewTimesheetTableWithSpinner = WithSpinner(ViewTimesheetProxyContainerForWithSpinner);
 const ViewTimesheetTable = ({user}) => {
     const [gridApi, setGridApi] = useState(null);
     const [gridColumnApi, setGridColumnApi] = useState(null);
@@ -19,20 +20,24 @@ const ViewTimesheetTable = ({user}) => {
 
     
     const [rowData, setRowData] = useState([]);
-    
+    const [loading,setLoading] = useState(false);
+
     useEffect(() => {
+      setLoading(true)
       async function fetchData() {
       let result = await makeGetCall('/gac/viewTimeSheet',{svsId: user.UserId})
     
       console.log(result)
       setRowData(result)
+      setLoading(false)
       }
       fetchData();
     },[])
   
     
     return (
-         
+         loading ? (<ViewTimesheetTableWithSpinner isLoading={loading}/>)
+         :(
         <div className="ag-theme-alpine" style={ { padding: '20px',display: 'inline-table', height: 'auto', width: '100%' } }>
            {rowData? ( <AgGridReact
                 rowData={rowData}
@@ -44,7 +49,7 @@ const ViewTimesheetTable = ({user}) => {
                 <AgGridColumn field="Status"></AgGridColumn>
             </AgGridReact>) : null}
         </div>
-    );
+    ));
 };
 
 const mapStateToProps = createStructuredSelector({
