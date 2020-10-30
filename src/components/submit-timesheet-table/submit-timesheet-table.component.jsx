@@ -70,7 +70,7 @@ allRowsData.forEach(row =>{
    
   
     for (const [key, value] of Object.entries(row)) {
-      if(key !== "project"){
+      if(key !== "project" && key !=="ProjectId"){
       //console.log(typeof value);
       totalHours = totalHours + parseInt(value);
       }
@@ -105,21 +105,7 @@ allRowsData.forEach(row =>{
     try{
      event.preventDefault();
 
-  //   {
-  //     "SvsId": "divyak",
-  //     "WeekEndDate": "2020-10-11",
-  //     "Status": "submit",
-  //     "WeekNumber":41,
-  //     "TotalHours": 20,
-  //     "lstTimeSheetDetails": [
-  //       {
-  //         "ProjectId": "875643",
-  //         "ProjectName": "ECommerce",
-  //         "WeekDate": "2020-10-05",
-  //         "WeekDay": "Mon",
-  //         "WeekDayHours": 4
-  //       }]
-  //  }
+
 
   let finalRowsData=[];
   let finalData=[]
@@ -136,9 +122,9 @@ allRowsData.forEach(row =>{
     for (const [key, value] of Object.entries(row)) {
 
       
-      if(key !== "project" && key !== "projectId"){
+      if(key !== "project" && key !== "ProjectId"){
         finalData.push({
-        "ProjectId": "875643",
+        "ProjectId": row.ProjectId,
         "ProjectName": row.project,
         "WeekDate": key,
          "WeekDay": weekDays[i],
@@ -171,21 +157,20 @@ allRowsData.forEach(row =>{
 
   const onSuccess = (data) => {
 
-    console.log(data)
+    console.log("Data",data)
     if(data === "TimeSheet Submitted")
     setShowSuccess(true)
     setSuccessMessage("Timesheet Submitted Successfully")
 
-    if(data.error){
-      setAlertMessage('Failed to Submit Timesheet');
-      setShow(true)
-      setShowAlert(true)
-    }
     
+    //TimeSheet Already Submitte
   };
 
   const onFailure = error => {
-    console.log(error);
+    console.log("Error",error);
+    setAlertMessage('Something went wrong\n'+error);
+    setShow(true)
+    setShowAlert(true)
     //this.setState({errors: error.response.data, isLoading: false});
   };
   
@@ -194,7 +179,7 @@ allRowsData.forEach(row =>{
       .then(onSuccess)
       .catch(onFailure);
     } catch (error) {
-      console.log(error);
+      console.log("Error caught",error);
     }        
 
 
@@ -210,6 +195,7 @@ allRowsData.forEach(row =>{
       let columns =[];
       let rows = []
       columns.push({headerName: 'Project', field: 'project', width:150})
+      columns.push({headerName: 'Project Id', field: 'ProjectId', hide: true})
       dates.forEach(date => {
       columns.push({headerName: moment(date).format('YYYY-MM-DD'), field: moment(date).format('YYYY-MM-DD'),width:110, editable: true, cellEditor: 'numericCellEditor' })
 
@@ -227,6 +213,7 @@ allRowsData.forEach(row =>{
         let o = {}
 
         o['project'] = row.ProjectName
+        o['ProjectId'] = row.ProjectId
         //console.log(this.state.rowData)
         dates.forEach(date => {
 
