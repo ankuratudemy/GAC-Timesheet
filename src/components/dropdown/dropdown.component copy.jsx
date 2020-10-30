@@ -28,7 +28,7 @@ class Dropdown extends Component {
 
         return (
             <div style={{margin: "auto"}}>
-                <select style={{margin: "10px", backgroundColor: '#016879', color: 'white', fontSize: "20px", fontFamily: 'Open Sans Condensed', borderWidth: '0px'}} onChange={this.props.handleInputChange} name={this.props.name} >
+                <select style={{margin: "10px", backgroundColor: '#006089', color: 'white', fontSize: "20px", fontFamily: 'Open Sans Condensed', borderWidth: '0px'}} onChange={this.props.handleInputChange} name={this.props.name} >
                    
                     {options}
 

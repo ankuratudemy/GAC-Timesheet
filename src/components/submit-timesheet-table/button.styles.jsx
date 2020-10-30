@@ -5,7 +5,7 @@ import CustomButton from '../custom-button/custom-button.component';
 export const ButtonsBarContainer = styled.div`
   display: flex;
   justify-content: center;
-  background-color: #016879;
+  background-color: #006089;
 `;
 
 export const SubmitTimesheetButton = styled(CustomButton)`

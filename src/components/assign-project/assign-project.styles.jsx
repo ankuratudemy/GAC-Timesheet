@@ -24,7 +24,7 @@ text-align: center;
 export const DropdownBarContainer = styled.div`
   display: flex;
  
-  background-color: #016879;
+  background-color: #006089;
   justify-content: left;
 
   height: 50px;
@@ -32,7 +32,7 @@ export const DropdownBarContainer = styled.div`
   
   margin-bottom: 10px;
   margin-top: 1px;
-  background-color: #016879;
+  background-color: #006089;
   position: relative;
   z-index: 1000;
 `;
@@ -41,7 +41,7 @@ export const CapturedvaluesContainer = styled.div`
 display: flex;
 align-items: center;
 color: white;
-background-color: #016879;
+background-color: #006089;
 justify-content: left;
 
 height: 40px;
@@ -49,7 +49,7 @@ width: fit-content;
 
 margin-bottom: 1px;
 margin-top: 1px;
-background-color: #016879;
+background-color: #006089;
 position: fixed;
 bottom: 20%;
 
@@ -63,6 +63,7 @@ margin-bottom: 5px;
 display: flex;
 font-size: 20px;
 margin-right: 25px;
+margin-left: 25px;
 min-width: 70px;
   width: 70px;
   align-items: right;  

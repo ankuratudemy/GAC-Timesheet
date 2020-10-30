@@ -5,7 +5,7 @@ export const SignInContainer = styled.div`
   height: 100%;
   display: flex;
   flex-direction: column;
-  background-color: #016879;
+  background-color: #006089;
 `;
 
 export const SignInTitle = styled.h2`
@@ -20,6 +20,6 @@ text-align: center;
 export const ButtonsBarContainer = styled.div`
   display: flex;
   justify-content: center;
-  background-color: #016879;
+  background-color: #006089;
   margin: 5px;
 `;

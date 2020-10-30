@@ -43,7 +43,7 @@ const Header = ({history, currentUser, hidden,logoutUser }) => {
 
       <OptionLink style={{display: 'flex', alignContent: 'space-between'}}  to='/'>
         <div style={{paddingRight: '2px'}}>
-             <img width="15" height="15" src={homeIcon} />
+             <img style={{verticalAlign: 'baseline'}} width="15" height="15" src={homeIcon} />
         </div>Home
       </OptionLink>
       <OptionLink  style={{display: 'flex', flexDirection: 'column' }}  onMouseEnter={toggling}  onMouseLeave={toggling} >
