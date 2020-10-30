@@ -4,8 +4,8 @@ import loginpagepng from './assets/login-page.png'
 export const SignUpContainer = styled.div`
   display: flex;
   flex-direction: column;
-  width: 100vh;
-  height: 100vh;
+  width: 100%;
+  height: 100%;
 `;
 
 export const SignUpTitle = styled.h2`

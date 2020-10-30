@@ -10,16 +10,18 @@ import { selectCurrentUser } from '../../redux/user/user.selectors';
 import './submit-timesheet.styles.css'
 import { useEffect } from 'react';
 import WithSpinner from '../with-spinner/with-spinner.component'
-import {selectSubmitSelectedDays} from '../../redux/submit-timesheet/submit-timesheet.selectors'
+import {selectSubmitSelectedDays,selectSubmitWeekNumber} from '../../redux/submit-timesheet/submit-timesheet.selectors'
 import moment from 'moment';
 import  NumericCellEditor  from './NumericEditor';
 import {SubmitTimesheetButton,ButtonsBarContainer} from './button.styles'
 import { GridApi } from 'ag-grid-community';
 import Alert from 'react-bootstrap/Alert'
+import {makePostCall} from '../../firebase/user.utils'
+
 
 const ButtonsBarContainerWithSpinner = WithSpinner(ButtonsBarContainer);
 
-const SubmitTimesheetTable = ({user,dates}) => {
+const SubmitTimesheetTable = ({user,dates, weekNumber}) => {
     
     const [gridApi, setGridApi] = useState(null);
     const [gridColumnApi, setGridColumnApi] = useState(null);
@@ -31,6 +33,8 @@ const SubmitTimesheetTable = ({user,dates}) => {
     const [show, setShow] = useState(true);
     const [alertMessage, setAlertMessage] = useState(null);
     const [loading,setLoading] = useState(false);
+    const [showSuccess,setShowSuccess] = useState(false);
+    const [successMessage,setSuccessMessage] = useState('')
     var alertMessages='';
     const frameworkComponents = {
 
@@ -96,9 +100,107 @@ allRowsData.forEach(row =>{
     };
 
   
-   const submitTotalHours = () =>{
+   const submitTotalHours = (event) =>{
 
-     
+    try{
+     event.preventDefault();
+
+  //   {
+  //     "SvsId": "divyak",
+  //     "WeekEndDate": "2020-10-11",
+  //     "Status": "submit",
+  //     "WeekNumber":41,
+  //     "TotalHours": 20,
+  //     "lstTimeSheetDetails": [
+  //       {
+  //         "ProjectId": "875643",
+  //         "ProjectName": "ECommerce",
+  //         "WeekDate": "2020-10-05",
+  //         "WeekDay": "Mon",
+  //         "WeekDayHours": 4
+  //       }]
+  //  }
+
+  let finalRowsData=[];
+  let finalData=[]
+  
+  gridApi.forEachNode(node => finalRowsData.push(node.data));
+  //console.log(finalRowsData)
+
+
+  finalRowsData.forEach(row =>{
+   
+    let i=0;
+    let weekDays =["Mon","Tue","Wed","Thu","Fri","Sat","Sun"]
+
+    for (const [key, value] of Object.entries(row)) {
+
+      
+      if(key !== "project" && key !== "projectId"){
+        finalData.push({
+        "ProjectId": "875643",
+        "ProjectName": row.project,
+        "WeekDate": key,
+         "WeekDay": weekDays[i],
+        "WeekDayHours": value
+
+      })
+      i++;
+    }
+
+  }
+}
+
+
+
+
+  )
+  
+  let dataToSubmit ={
+   
+    "SvsId": user.UserId,
+    "WeekEndDate": moment(dates[6]).format('YYYY-MM-DD'),
+    "Status": "submit",
+    "WeekNumber": weekNumber,
+    "TotalHours": 20,
+    "lstTimeSheetDetails": finalData
+
+
+  }
+  console.log("Final Data",dataToSubmit)
+
+  const onSuccess = (data) => {
+
+    console.log(data)
+    if(data === "TimeSheet Submitted")
+    setShowSuccess(true)
+    setSuccessMessage("Timesheet Submitted Successfully")
+
+    if(data.error){
+      setAlertMessage('Failed to Submit Timesheet');
+      setShow(true)
+      setShowAlert(true)
+    }
+    
+  };
+
+  const onFailure = error => {
+    console.log(error);
+    //this.setState({errors: error.response.data, isLoading: false});
+  };
+  
+
+      makePostCall('/gac/submitTimeSheet', dataToSubmit)
+      .then(onSuccess)
+      .catch(onFailure);
+    } catch (error) {
+      console.log(error);
+    }        
+
+
+
+
+
    }
 
     useEffect(() => {
@@ -193,12 +295,19 @@ allRowsData.forEach(row =>{
                {alertMessage}
           </p>
              </Alert>):(null)}
+
+             {showSuccess ? (<Alert variant="success"  show={show} onClose={() =>{setShowSuccess(false);setSuccessMessage(null)}} dismissible>
+               <Alert.Heading>Success!</Alert.Heading>
+          <p>
+               {successMessage}
+          </p>
+             </Alert>):(null)}
               
               <form onSubmit={submitTotalHours}>
                <div>
                   <span style={{fontSize: '15px'}}>Total Hours: {totalHours}</span>
                   <ButtonsBarContainer>
-                     <SubmitTimesheetButton type='submit' onClick={()=>submitTotalHours()}> Submit </SubmitTimesheetButton>
+                     <SubmitTimesheetButton type='submit' onClick={(event)=>submitTotalHours(event)}> Submit </SubmitTimesheetButton>
             
                  </ButtonsBarContainer>
                </div>
@@ -218,7 +327,8 @@ allRowsData.forEach(row =>{
 
 const mapStateToProps = createStructuredSelector({
     user: selectCurrentUser,
-    dates: selectSubmitSelectedDays
+    dates: selectSubmitSelectedDays,
+    weekNumber: selectSubmitWeekNumber
   });
 
 

@@ -1,8 +1,8 @@
 import styled from 'styled-components';
 
 export const SignInContainer = styled.div`
-  width: 100vh;
-  height: 100vh;
+  width: 100%;
+  height: 100%;
   display: flex;
   flex-direction: column;
   background-color: #016879;
@@ -21,4 +21,5 @@ export const ButtonsBarContainer = styled.div`
   display: flex;
   justify-content: center;
   background-color: #016879;
+  margin: 5px;
 `;
