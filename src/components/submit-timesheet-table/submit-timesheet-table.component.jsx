@@ -208,7 +208,7 @@ allRowsData.forEach(row =>{
       let result = await makeGetCall('/gac/projectAllocationDates',{svsId: user.UserId, weekStartDate: moment(dates[0]).format('YYYY/MM/DD'), weekEndDate: moment(dates[6]).format('YYYY/MM/DD')})
       console.log("Result##: ",result)
       
-   
+      if(result.lstProjectsAllocation.length >0){
       result.lstProjectsAllocation.forEach(row => {
         let o = {}
 
@@ -224,6 +224,8 @@ allRowsData.forEach(row =>{
         rows.push(o);
         setLoading(false)
       })
+    }
+    
       setRowData(rows)
       setTotalHours(0)
       
@@ -236,7 +238,7 @@ allRowsData.forEach(row =>{
     },[dates])
   
     return (
-       
+       rowData.length >0 ? (
       loading ? (<ButtonsBarContainerWithSpinner isLoading={loading} />):(
       <div 
       style={{
@@ -307,7 +309,9 @@ allRowsData.forEach(row =>{
           </div>
         </div>
       </div>
-    )
+    ))
+  :
+  (<div style={{alignContent: "center"}}><p style={{alignContent: "center",fontFamily: "monospace",backgroundColor: "#FF6961", textAlign: "center"}}>No Projects have been assigned to you for selected  week</p></div>)
     );    
     
 };

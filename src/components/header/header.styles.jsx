@@ -7,7 +7,7 @@ export const HeaderContainer = styled.div`
   display: flex;
   justify-content: space-between;
   margin-bottom: none;
-  background-color: #006089;
+  background-color: #006189;
   position: relative;
   z-index: 10000;
 `;
@@ -39,7 +39,7 @@ export const OptionLink = styled(Link)`
   text-align: flex;
   &:hover {
   background-color: white;
-  color: #006089;
+  color: #006189;
   border: 0px solid black;
   margin-left: 5px
   
@@ -50,7 +50,7 @@ export const OptionLink = styled(Link)`
 export const ButtonsBarContainer = styled.div`
   display: flex;
   justify-content: absolute;
-  background-color: #006089;
+  background-color: #006189;
 `;
 
 export const HeaderLogoutButton = styled(CustomButton)`

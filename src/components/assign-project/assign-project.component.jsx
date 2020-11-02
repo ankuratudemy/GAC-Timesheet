@@ -12,6 +12,7 @@ import {makePostCall} from '../../firebase/user.utils'
 import WithSpinner from '../with-spinner/with-spinner.component'
 
 const AssignProjectContainerWithSpinner = WithSpinner(AssignProjectContainer);
+//const CapturedvaluesContainerWithSpinner = WithSpinner(CapturedvaluesContainer);
 
 class AssignProject extends Component {
     constructor() {
@@ -32,7 +33,8 @@ class AssignProject extends Component {
             errorMessage: '',
             successMessage: '',
             showSuccess: false,
-            loading: true
+            loading: true,
+            submitLoading: false
         };
     }
 
@@ -152,6 +154,7 @@ class AssignProject extends Component {
     }
     }
     submitAssignProject = (event) => {
+        this.setState({submitLoading: true})
         event.preventDefault();
         console.log("Submitted values")
 
@@ -169,14 +172,14 @@ class AssignProject extends Component {
         let dataToSubmit =  {
                     "SvsId": this.state.employeeid,
                     "ProjectId": this.state.projectid,
-                    "Domain": this.state.project,
-                    "StartDate":this.state.startDate,
-                    "EndDate":this.state.endDate,
+                    "Domain": this.state.project.split("(")[0],
+                    "StartDate":moment(this.state.startDate).format('YYYY-MM-DD'),
+                    "EndDate":moment(this.state.endDate).format('YYYY-MM-DD'),
                     "BandWidth":this.state.capacity.split("%")[0]
                 }
         
                 
-
+                console.log("Assign project# ",dataToSubmit)
                 const onSuccess = (data) => {
 
                   console.log(data)
@@ -187,11 +190,14 @@ class AssignProject extends Component {
                   this.setState({showError: true})
                   this.setState({errorMessage: "Failed to assign project!"})
                   }
-                  this.setState({loading: false});
+                  
+                  this.setState({submitLoading: false,capacity:null,project: null,startDate:null,endDate: null,employee:null})
                 };
             
                 const onFailure = error => {
                   console.log(error);
+                  this.setState({submitLoading: false,capacity:null,project: null,startDate:null,endDate: null,employee:null})
+                 
                   //this.setState({errors: error.response.data, isLoading: false});
                 };
                 
@@ -208,7 +214,7 @@ class AssignProject extends Component {
 
     render() {
         return (
-         this.state.loading ? (<AssignProjectContainerWithSpinner isLoading= {this.state.loading} />)
+         this.state.loading || this.state.submitLoading ? (<AssignProjectContainerWithSpinner isLoading= {this.state.loading} />)
                 :(
            <AssignProjectContainer>
             <DropdownBarContainer>

@@ -49,7 +49,8 @@ componentDidMount() {
   fetch('http://iis.srivensolutions.com:8088/gac/projectAllocationDates?svsId=divyak&weekStartDate=2020/10/01&weekEndDate=2020/10/18')
       .then(result => result.json())
       .then(rowData => {
-       
+        
+        if(rowData.lstProjectsAllocation.length >0){
        rowData.lstProjectsAllocation.forEach(row => {
         let o = {}
 
@@ -63,8 +64,8 @@ componentDidMount() {
 
         rows.push(o);
       })
-
-      
+    }
+    else this.state.rowData =null      
     }
       )
       
@@ -83,33 +84,8 @@ componentDidMount() {
   render(){
       return (
 
-    // <div 
-    // style={{
-    //   width: '100%',
-    //   height: '100%',
-    //   display: 'flex',
-    //   flexDirection: 'column',
-    //   justifyContent: 'space-between',
-    // }}
-    // >
-    //   <div className="example-wrapper">
-    //     <div
-    //       style={{
-    //         marginBottom: '5px',
-    //         display: 'flex',
-    //         justifyContent: 'space-between',
-    //       }}
-    //     >
-    //     </div>
-    //     <div className="grid-wrapper">
-    //       <div
-    //         id="myGrid"
-    //         style={{
-    //           height: '100%',
-    //           width: '100%',
-    //         }}
-    //         className="ag-theme-balham"
-    //       >
+      this.state.rowData ? (
+
     <div
                 className="ag-theme-balham"
                 style={{height: '200px', width: '600px'}}
@@ -122,11 +98,8 @@ componentDidMount() {
                     frameworkComponents={this.state.frameworkComponents}
                     rowData={this.state.rowData}>
             </AgGridReact>
-            </div>
-    //       </div>
-    //     </div>
-    //   </div>
-    // </div>
+            </div>) : <div><p>No Projects have been assigned to you for selected  week</p></div>
+
   );
 }
 }
