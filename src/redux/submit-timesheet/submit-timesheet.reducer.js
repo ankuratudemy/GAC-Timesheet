@@ -1,5 +1,4 @@
 import SubmitTimesheetActionTypes from './submit-timesheet.types';
-//import { addItemToCart, removeItemFromCart } from './cart.utils';
 
 const INITIAL_STATE = {
   submitHidden: true,

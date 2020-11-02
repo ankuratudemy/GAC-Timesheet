@@ -1,7 +1,6 @@
 import React from "react";
 import Button from "./button";
 import DropDownCard from "../dropdown-card/dropdown-card.component";
-// const sampleData = new Array(7).fill("item name");
  const Dropdown = ({data,name,handleInputChange}) => {
 
   const [open, setOpen] = React.useState(false);

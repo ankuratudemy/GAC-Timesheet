@@ -12,7 +12,7 @@ const StartDate =({handleDatePick,name}) => {
             position: "relative",
             margin: "16px",
             width: "auto",
-            display: "inline-block"
+            
           }}>
       <button style={{backgroundColor: '#01587D',  color: 'white', fontSize: '15px', border: 'none', marginRight: '5px'}} onClick={onClick}>
         {name}

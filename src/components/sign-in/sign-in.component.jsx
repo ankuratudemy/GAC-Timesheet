@@ -1,13 +1,10 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { createStructuredSelector } from 'reselect';
 import FormInput from '../form-input/form-input.component';
 import CustomButton from '../custom-button/custom-button.component';
 
-import { auth, signInWithGoogle } from '../../firebase/firebase.utils';
 import {makePostCall} from '../../firebase/user.utils'
 import { setCurrentUser } from '../../redux/user/user.actions';
-import { selectCurrentUser } from '../../redux/user/user.selectors';
 import WithSpinner from '../with-spinner/with-spinner.component'
 import Alert from 'react-bootstrap/Alert'
 import {
@@ -110,10 +107,8 @@ class SignIn extends React.Component {
             required
           />
           <ButtonsBarContainer>
-            <CustomButton type='submit'> Login </CustomButton>
-            {/* <CustomButton onClick={signInWithGoogle} isGoogleSignIn>
-              Sign in with Google
-            </CustomButton> */}
+            <CustomButton  type='submit'> Login </CustomButton>
+           
           </ButtonsBarContainer>
         </form>
       </SignInContainer>
@@ -122,9 +117,7 @@ class SignIn extends React.Component {
   }
 }
 
-// const mapStateToProps = createStructuredSelector({
-//   currentUser: selectCurrentUser
-// });
+
 
 const mapDispatchToProps = dispatch => ({
   setCurrentUser: user => dispatch(setCurrentUser(user))
@@ -132,6 +125,6 @@ const mapDispatchToProps = dispatch => ({
 
 export default connect(
   null,
-  //mapStateToProps,
+ 
   mapDispatchToProps
 )(SignIn);

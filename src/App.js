@@ -5,12 +5,9 @@ import { createStructuredSelector } from 'reselect';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 import './App.css';
-import watermark from './assets/open-timesheet.PNG'
 import HomePage from './pages/homepage/homepage.component';
 import Timesheet from './pages/Timesheet/timesheet.component'
-import ShopPage from './pages/shop/shop.component';
 import SignInAndSignUpPage from './pages/sign-in-and-sign-up/sign-in-and-sign-up.component';
-import CheckoutPage from './pages/checkout/checkout.component';
 import AssignProject from './components/assign-project/assign-project.component'
 import Header from './components/header/header.component';
 

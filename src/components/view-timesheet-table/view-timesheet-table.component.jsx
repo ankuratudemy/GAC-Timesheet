@@ -5,17 +5,15 @@ import 'ag-grid-community/dist/styles/ag-grid.css';
 import 'ag-grid-community/dist/styles/ag-theme-alpine.css';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
-import { selectViewTSData} from '../../redux/view-timesheet/view-timesheet.selectors'
 import { selectCurrentUser } from '../../redux/user/user.selectors';
-import {setViewTSData} from '../../redux/view-timesheet/view-timesheet.actions'
 import { useEffect } from 'react';
 import {ViewTimesheetProxyContainerForWithSpinner} from './view-timesheet-table.styles'
 import WithSpinner from '../with-spinner/with-spinner.component'
 
 const ViewTimesheetTableWithSpinner = WithSpinner(ViewTimesheetProxyContainerForWithSpinner);
 const ViewTimesheetTable = ({user}) => {
-    const [gridApi, setGridApi] = useState(null);
-    const [gridColumnApi, setGridColumnApi] = useState(null);
+   // const [gridApi, setGridApi] = useState(null);
+    //const [gridColumnApi, setGridColumnApi] = useState(null);
     
 
     
@@ -32,7 +30,7 @@ const ViewTimesheetTable = ({user}) => {
       setLoading(false)
       }
       fetchData();
-    },[])
+    },[user.UserId])
   
     
     return (

@@ -54,19 +54,18 @@ function getWeekNumber(d) {
 }
 
 class WeekSelector extends React.Component {
-    constructor(props) {
-        super(props);
 
-      }
 
     
   handleDayChange = (date) => {
    
+    if( date <= new Date()){
     this.props.setSubmitSelectedDays(getWeekDays(getWeekRange(date).from));
     let year_week = getWeekNumber(date)
     console.log(year_week[1])
     this.props.setSubmitWeekNumber(year_week[1]);
     this.props.setSubmitHoverRange(getWeekRange(date))
+    }
     
   };
 
@@ -124,6 +123,7 @@ class WeekSelector extends React.Component {
           onDayMouseEnter={this.handleDayEnter}
           onDayMouseLeave={this.handleDayLeave}
           onWeekClick={this.handleWeekClick}
+          disabledDays={day => day > (new Date())}
         />
         {this.props.selectedDays.length === 7 && (
           

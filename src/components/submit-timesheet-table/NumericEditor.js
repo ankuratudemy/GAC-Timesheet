@@ -108,7 +108,7 @@ export default class NumericCellEditor extends Component {
   }
 
   handleChange(event) {
-    this.setState({ value: event.target.value });
+    this.setState({ value: event.target.value ? event.target.value:0  });
   }
 
   getCharCodeFromEvent(event) {
@@ -131,7 +131,7 @@ export default class NumericCellEditor extends Component {
     return (
       <input
         ref="input"
-        value={this.state.value}
+        value={this.state.value ? this.state.value: 0}
         onChange={this.handleChange}
         style={{ width: '100%' }}
       />

@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import loginpagepng from './assets/login-page.png'
 
 export const SignUpContainer = styled.div`
   display: flex;
@@ -24,5 +23,5 @@ export const BackgroundImageContainer = styled.div`
   margin: 0px;
   
   position: relative;
-  background-image: url(${loginpagepng});
+  
 `;

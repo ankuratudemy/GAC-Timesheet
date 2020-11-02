@@ -1,6 +1,4 @@
 import React, { Component } from 'react';
-import ReactDOM from 'react-dom';
-import {Route, withRouter} from 'react-router-dom';
 import Dropdown from '../dropdown/dropdown.component';
 import {AssignProjectContainer,DropdownBarContainer,CapturedvaluesContainer,AssignProjectButton} from './assign-project.styles'
 import {makeNoParamGetCall} from '../../firebase/user.utils'
@@ -12,7 +10,6 @@ import {makePostCall} from '../../firebase/user.utils'
 import WithSpinner from '../with-spinner/with-spinner.component'
 
 const AssignProjectContainerWithSpinner = WithSpinner(AssignProjectContainer);
-//const CapturedvaluesContainerWithSpinner = WithSpinner(CapturedvaluesContainer);
 
 class AssignProject extends Component {
     constructor() {
@@ -24,7 +21,7 @@ class AssignProject extends Component {
             projectLists: [],
             project: null,
             projectid: null,
-            resourceCapacity:[],
+            
             startDate: null,
             endDate: null,
             resourceCapacity: ["25%","50%","75%","100%"],
@@ -86,7 +83,7 @@ class AssignProject extends Component {
 
     handleInputChange = (e) => {
 
-        let name,value;
+       
         console.log(e.target.id.split("_")[0])
         if(e.target.id.split("_")[0] === "Resource List" )
         {
@@ -156,18 +153,9 @@ class AssignProject extends Component {
     submitAssignProject = (event) => {
         this.setState({submitLoading: true})
         event.preventDefault();
-        console.log("Submitted values")
+        
 
-        //gac/assignProjects 
-
-        // {
-        //     "SvsId":"testac",
-        //     "ProjectId":"465874",
-        //     "Domain":"IIB DEVELOPMENT",
-        //     "StartDate":"2020-03-05 00:00:00.000",
-        //     "EndDate":"2020-11-05 00:00:00.000",
-        //     "BandWidth":"50"
-        // }
+       
         try {
         let dataToSubmit =  {
                     "SvsId": this.state.employeeid,

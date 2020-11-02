@@ -1,30 +1,26 @@
 import React,{ useState } from 'react';
 import { connect } from 'react-redux';
-import {compose} from 'redux'
 import { createStructuredSelector } from 'reselect';
 import { withRouter } from 'react-router-dom';
 
-import { selectCartHidden } from '../../redux/cart/cart.selectors';
 import { selectCurrentUser } from '../../redux/user/user.selectors';
 import { logoutUser } from '../../redux/user/user.actions';
 
 
 import {
   HeaderContainer,
-  LogoContainer,
+  
   ButtonsBarContainer,
   OptionsContainer,
   OptionLink,
   HeaderLogoutButton,
   DropDownListContainer,
-  DropDownContainer,
   DropDownList,
   ListItem,
-  DropDownHeader
 } from './header.styles';
 
 
-const Header = ({history, currentUser, hidden,logoutUser }) => {
+const Header = ({history,logoutUser }) => {
   const [isOpen, setIsOpen] = useState(false);
   const toggling = () => setIsOpen(!isOpen);
   let homeIcon = require('../../assets/home.svg')
@@ -36,19 +32,17 @@ const Header = ({history, currentUser, hidden,logoutUser }) => {
 
   return (
   <HeaderContainer>
-    {/* <LogoContainer to='/'>
-      <Logo className='logo' />
-    </LogoContainer> */}
+   
     <OptionsContainer>
 
       <OptionLink style={{display: 'flex', alignContent: 'space-between'}}  to='/'>
         <div style={{paddingRight: '2px'}}>
-             <img style={{verticalAlign: 'baseline'}} width="15" height="15" src={homeIcon} />
+             <img style={{verticalAlign: 'baseline'}} alt="home" width="15" height="15" src={homeIcon} />
         </div>Home
       </OptionLink>
       <OptionLink  style={{display: 'flex', flexDirection: 'column' }}  onMouseEnter={toggling}  onMouseLeave={toggling} >
       <div style={{paddingRight: '2px'}}>
-             <img width="15" height="15" src={timesheetIcon} />Timesheet
+             <img alt="timesheet" width="15" height="15" src={timesheetIcon} />Timesheet
         </div>
       {isOpen && (
           <DropDownListContainer >
@@ -61,26 +55,15 @@ const Header = ({history, currentUser, hidden,logoutUser }) => {
         )}
       </OptionLink>
       <OptionLink style={{display: 'flex', alignContent: 'space-between'}} to='/approve'><div style={{paddingRight: '2px'}}>
-             <img width="15" height="15" src={approveTimesheetIcon} />
+             <img alt="approve_timesheet" width="15" height="15" src={approveTimesheetIcon} />
         </div>Approve Timesheets</OptionLink>
       <OptionLink style={{display: 'flex', alignContent: 'space-between'}} to='/assignproject'><div style={{paddingRight: '2px'}}>
-             <img width="15" height="15" src={assignProjectIcon} />
+             <img alt="assign project" width="15" height="15" src={assignProjectIcon} />
         </div>Assign Projects</OptionLink>
       <OptionLink style={{display: 'flex', alignContent: 'space-between'}} to='/dashboard'><div style={{paddingRight: '2px'}}>
-             <img width="15" height="15" src={dashboardIcon} />
+             <img alt="dashboard" width="15" height="15" src={dashboardIcon} />
         </div>Dashboard</OptionLink>
-      {/* {currentUser ? (
-        <OptionLink as='div' onClick={() => auth.signOut()}>
-          SIGN OUT
-        </OptionLink>
-      ) : (
-        <OptionLink to='/signin'>SIGN IN</OptionLink>
-      )} */}
-      {/* <CartIcon /> */}
-      
-      {/* <OptionLink as='div' onClick={() => auth.signOut()}>
-          Logout
-      </OptionLink> */}
+     
 
       
     </OptionsContainer>
@@ -92,8 +75,7 @@ const Header = ({history, currentUser, hidden,logoutUser }) => {
 )};
 
 const mapStateToProps = createStructuredSelector({
-  currentUser: selectCurrentUser,
-  hidden: selectCartHidden
+  currentUser: selectCurrentUser
 });
 
 const mapDispatchToProps = dispatch => ({

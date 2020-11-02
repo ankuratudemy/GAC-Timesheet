@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { AgGridColumn, AgGridReact } from 'ag-grid-react';
+import { AgGridReact } from 'ag-grid-react';
 import {makeGetCall} from '../../firebase/user.utils'
 import 'ag-grid-community/dist/styles/ag-grid.css';
 import 'ag-grid-community/dist/styles/ag-theme-alpine.css';
@@ -14,7 +14,7 @@ import {selectSubmitSelectedDays,selectSubmitWeekNumber} from '../../redux/submi
 import moment from 'moment';
 import  NumericCellEditor  from './NumericEditor';
 import {SubmitTimesheetButton,ButtonsBarContainer} from './button.styles'
-import { GridApi } from 'ag-grid-community';
+//import { GridApi } from 'ag-grid-community';
 import Alert from 'react-bootstrap/Alert'
 import {makePostCall} from '../../firebase/user.utils'
 
@@ -24,8 +24,8 @@ const ButtonsBarContainerWithSpinner = WithSpinner(ButtonsBarContainer);
 const SubmitTimesheetTable = ({user,dates, weekNumber}) => {
     
     const [gridApi, setGridApi] = useState(null);
-    const [gridColumnApi, setGridColumnApi] = useState(null);
-    const [selectedDates,setSelectedDates] = useState(dates);
+    //const [gridColumnApi, setGridColumnApi] = useState(null);
+    // const [selectedDates,setSelectedDates] = useState(dates);
     const [totalHours,setTotalHours] = useState(0);
     const [rowData, setRowData] = useState([]);
     const [columnDefs,setColumnDefs] = useState([]);
@@ -35,7 +35,7 @@ const SubmitTimesheetTable = ({user,dates, weekNumber}) => {
     const [loading,setLoading] = useState(false);
     const [showSuccess,setShowSuccess] = useState(false);
     const [successMessage,setSuccessMessage] = useState('')
-    var alertMessages='';
+    // var alertMessages='';
     const frameworkComponents = {
 
           'numericCellEditor': NumericCellEditor,
@@ -45,7 +45,7 @@ const SubmitTimesheetTable = ({user,dates, weekNumber}) => {
 
     const onGridReady = (params) => { 
       setGridApi(params.api);
-      setGridColumnApi(params.columnApi);
+      //setGridColumnApi(params.columnApi);
       
     };
 
@@ -104,6 +104,7 @@ allRowsData.forEach(row =>{
 
     try{
      event.preventDefault();
+     setLoading(true)
 
 
 
@@ -161,7 +162,7 @@ allRowsData.forEach(row =>{
     if(data === "TimeSheet Submitted")
     setShowSuccess(true)
     setSuccessMessage("Timesheet Submitted Successfully")
-
+    setLoading(false)
     
     //TimeSheet Already Submitte
   };
@@ -171,6 +172,7 @@ allRowsData.forEach(row =>{
     setAlertMessage('Something went wrong\n'+error);
     setShow(true)
     setShowAlert(true)
+    setLoading(false)
     //this.setState({errors: error.response.data, isLoading: false});
   };
   
@@ -225,6 +227,7 @@ allRowsData.forEach(row =>{
         setLoading(false)
       })
     }
+      setLoading(false)
     
       setRowData(rows)
       setTotalHours(0)
@@ -235,10 +238,20 @@ allRowsData.forEach(row =>{
        fetchData();
       
       
-    },[dates])
+    },[dates,user.UserId])
   
+    if (rowData.length <=0) {
+
     return (
-       rowData.length >0 ? (
+      loading ? (<ButtonsBarContainerWithSpinner isLoading={loading} />) :
+  (<div style={{alignContent: "center"}}>
+    <p style={{fontFamily: "monospace",backgroundColor: '#FF6961'}}>
+      No Projects have been assigned to you for selected  week</p>
+   </div>)
+    )
+    }
+    return (
+     
       loading ? (<ButtonsBarContainerWithSpinner isLoading={loading} />):(
       <div 
       style={{
@@ -310,9 +323,7 @@ allRowsData.forEach(row =>{
         </div>
       </div>
     ))
-  :
-  (<div style={{alignContent: "center"}}><p style={{alignContent: "center",fontFamily: "monospace",backgroundColor: "#FF6961", textAlign: "center"}}>No Projects have been assigned to you for selected  week</p></div>)
-    );    
+     
     
 };
 

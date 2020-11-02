@@ -12,7 +12,7 @@ if(data[0].EmployeeName) {
       <div className="dropdown-content">
     
       {data.map((item, i) => (
-        <a key ={item.SvsId} data-key ={item.SvsId} id={name+'_'+i}  onClick={(event) =>{setOpen(false);handleInputChange(event);} }>
+        <a href="!#" key ={item.SvsId} data-key ={item.SvsId} id={name+'_'+i}  onClick={(event) =>{setOpen(false);handleInputChange(event);} }>
           {item.EmployeeName? item.EmployeeName+'('+item.SvsId+')' : item}
         </a>
       ))}
@@ -29,7 +29,7 @@ if(data[0].EmployeeName) {
              <div className="dropdown-content">
            
              {data.map((item, i) => (
-               <a key ={item.ProjectId} data-key ={item.ProjectId} id={name+'_'+i}  onClick={(event) =>{setOpen(false);handleInputChange(event);} }>
+               <a href="!#" key ={item.ProjectId} data-key ={item.ProjectId} id={name+'_'+i}  onClick={(event) =>{setOpen(false);handleInputChange(event);} }>
                  {item.ProjectName? item.ProjectName+'('+item.ProjectId+')' : item}
                </a>
              ))}
@@ -46,7 +46,7 @@ if(data[0].EmployeeName) {
           <div className="dropdown-content">
         
           {data.map((item, i) => (
-            <a key ={name+'_'+i} id={name+'_'+i}  onClick={(event) =>{setOpen(false);handleInputChange(event);} }>
+            <a href="!#" key ={name+'_'+i} id={name+'_'+i}  onClick={(event) =>{setOpen(false);handleInputChange(event);} }>
               {item}
             </a>
           ))}
