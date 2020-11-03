@@ -16,7 +16,7 @@ moment.locale('uk', {
 })
 
 function getWeekDays(weekStart) {
-  console.log(weekStart)
+  //console.log(weekStart)
    
   const days = [weekStart];
   for (let i =1; i < 7; i += 1) {
@@ -65,7 +65,7 @@ class ViewWeekSelector extends React.Component {
    
     this.props.setSelectedDays(getWeekDays(getWeekRange(date).from));
     let year_week = getWeekNumber(date)
-    console.log(year_week[1])
+    //console.log(year_week[1])
     this.props.setWeekNumber(year_week[1]);
     this.props.setHoverRange(getWeekRange(date))
     this.props.setViewTSData(this.props.userid.UserId)

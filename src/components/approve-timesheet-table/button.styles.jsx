@@ -22,4 +22,8 @@ min-width: 70px;
   letter-spacing: 2px;
   line-height: 30px;
   text-transform: none;
+  &:disabled {
+    background-color: #77DD77;
+    color: black;
+  }
 `;

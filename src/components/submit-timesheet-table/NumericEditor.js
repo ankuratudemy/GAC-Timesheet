@@ -121,7 +121,7 @@ export default class NumericCellEditor extends Component {
   }
 
   isKeyPressedNumeric(event) {
-      console.log("Event#", event)
+    //  console.log("Event#", event)
     const charCode = this.getCharCodeFromEvent(event);
     const charStr = event.key ? event.key : String.fromCharCode(charCode);
     return this.isCharNumeric(charStr) && (charStr !=="9");

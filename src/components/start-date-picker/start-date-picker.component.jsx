@@ -3,7 +3,7 @@ import "react-datepicker/dist/react-datepicker.css";
 import React from 'react'
 
 const StartDate =({handleDatePick,name}) => {
-    console.log("name", name)
+  //  console.log("name", name)
     const startDate = new Date();
 
     const ExampleCustomInput = ({ value, onClick }) => (

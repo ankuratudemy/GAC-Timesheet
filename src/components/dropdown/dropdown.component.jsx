@@ -7,7 +7,7 @@ import DropDownCard from "../dropdown-card/dropdown-card.component";
   const drop = React.useRef(null);
 
   function handleClick(e) {
-    console.log("Event1",e)
+   // console.log("Event1",e)
     if (!e.target.closest(`.${drop.current.className}`) && open) {
       setOpen(false);
     }

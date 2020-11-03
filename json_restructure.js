@@ -64,7 +64,7 @@ var temp_keys = {};
 //Loop trough data
 for (let i in res.lstTimeSheetDetails)
 {
-    console.log(" temp length is :" + temp.length + "temp_keys[temp.length] is "+temp[temp.length])
+    // console.log(" temp length is :" + temp.length + "temp_keys[temp.length] is "+temp[temp.length])
     //Check if key is allready stored in object
     if (!temp_keys[res.lstTimeSheetDetails[i]['ProjectName']])
     {
@@ -82,5 +82,5 @@ for (let i in res.lstTimeSheetDetails)
     //Save values into correct position
     temp[temp_keys[res.lstTimeSheetDetails[i]['ProjectName']]]['values'].push([res.lstTimeSheetDetails[i]['ProjectId'], res.lstTimeSheetDetails[i]['WeekDate'],res.lstTimeSheetDetails[i]['WeekDate'],res.lstTimeSheetDetails[i]['WeekDay'],res.lstTimeSheetDetails[i]['WeekDayHours']]);
 }
-console.log(temp);
-console.log(JSON.stringify(temp));
+//console.log(temp);
+//console.log(JSON.stringify(temp));

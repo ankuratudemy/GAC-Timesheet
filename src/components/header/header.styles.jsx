@@ -97,7 +97,7 @@ export const DropDownList = styled("ul")`
   background: #ffffff;
   border: 2px solid #e5e5e5;
   box-sizing: border-box;
-  color: #3faffa;
+  color: white;
   font-size: 1rem;
   font-weight: 500;
   background: #016789;

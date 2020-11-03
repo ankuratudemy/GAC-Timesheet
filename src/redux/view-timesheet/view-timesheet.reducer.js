@@ -23,7 +23,7 @@ const viewTimesheetReducer =  (state = INITIAL_STATE, action) => {
         selectedDays: action.payload
       };
       case ViewTimesheetActionTypes.SET_VIEWTS_DATA:
-        console.log("Inside Reducer case",action.payload)
+        //console.log("Inside Reducer case",action.payload)
         return {
 
           ...state,

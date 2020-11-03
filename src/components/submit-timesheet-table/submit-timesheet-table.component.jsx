@@ -34,7 +34,8 @@ const SubmitTimesheetTable = ({user,dates, weekNumber}) => {
     const [alertMessage, setAlertMessage] = useState(null);
     const [loading,setLoading] = useState(false);
     const [showSuccess,setShowSuccess] = useState(false);
-    const [successMessage,setSuccessMessage] = useState('')
+    const [successMessage,setSuccessMessage] = useState('');
+    const [alreadySubmitted,setAlreadySubmitted]= useState(false);
     // var alertMessages='';
     const frameworkComponents = {
 
@@ -53,17 +54,17 @@ const SubmitTimesheetTable = ({user,dates, weekNumber}) => {
 
   const onCellValueChanged = (event) => {
       
-      console.log('Data after change is', event);
+    //  console.log('Data after change is', event);
       let allRowsData = [];
 
 
 //gridColumnApi.setColumnAggFunc(event.column.colId, 'sum')
-console.log(event.column.colId)
+//console.log(event.column.colId)
 
 
 gridApi.forEachNode(node => allRowsData.push(node.data));
         
-console.log(allRowsData)
+//console.log(allRowsData)
  let totalHours = 0;
  let columnSum =0;
 allRowsData.forEach(row =>{
@@ -81,8 +82,8 @@ allRowsData.forEach(row =>{
     }
 
   })
-  console.log("Total Hours: ", totalHours)
-  console.log("Column Sum: ",columnSum)
+  //console.log("Total Hours: ", totalHours)
+  //console.log("Column Sum: ",columnSum)
   if(columnSum > 8 || totalHours >40){
     
     let rowNode = gridApi.getRowNode(event.node.id);
@@ -147,18 +148,18 @@ allRowsData.forEach(row =>{
    
     "SvsId": user.UserId,
     "WeekEndDate": moment(dates[6]).format('YYYY-MM-DD'),
-    "Status": "submit",
+    "Status": "submitted",
     "WeekNumber": weekNumber,
     "TotalHours": 20,
     "lstTimeSheetDetails": finalData
 
 
   }
-  console.log("Final Data",dataToSubmit)
+  //console.log("Final Data",dataToSubmit)
 
   const onSuccess = (data) => {
 
-    console.log("Data",data)
+    //console.log("Data",data)
     if(data === "TimeSheet Submitted")
     setShowSuccess(true)
     setSuccessMessage("Timesheet Submitted Successfully")
@@ -168,7 +169,7 @@ allRowsData.forEach(row =>{
   };
 
   const onFailure = error => {
-    console.log("Error",error);
+    //console.log("Error",error);
     setAlertMessage('Something went wrong\n'+error);
     setShow(true)
     setShowAlert(true)
@@ -181,7 +182,7 @@ allRowsData.forEach(row =>{
       .then(onSuccess)
       .catch(onFailure);
     } catch (error) {
-      console.log("Error caught",error);
+      //console.log("Error caught",error);
     }        
 
 
@@ -193,7 +194,7 @@ allRowsData.forEach(row =>{
     useEffect(() => {
       
       setLoading(true)
-      console.log("Dates##", dates)
+      //console.log("Dates##", dates)
       let columns =[];
       let rows = []
       columns.push({headerName: 'Project', field: 'project', width:150})
@@ -205,12 +206,13 @@ allRowsData.forEach(row =>{
       setColumnDefs(columns)
 
 
-      console.log("Columns## : ",columns)
+      //console.log("Columns## : ",columns)
       async function fetchData() {
       let result = await makeGetCall('/gac/projectAllocationDates',{svsId: user.UserId, weekStartDate: moment(dates[0]).format('YYYY/MM/DD'), weekEndDate: moment(dates[6]).format('YYYY/MM/DD')})
-      console.log("Result##: ",result)
+     // console.log("Result##: ",result)
       
-      if(result.lstProjectsAllocation.length >0){
+      if(result.lstProjectsAllocation.length >0 && !result.IsSubmit){
+        console.log("111", result.lstProjectsAllocation.length)
       result.lstProjectsAllocation.forEach(row => {
         let o = {}
 
@@ -224,23 +226,60 @@ allRowsData.forEach(row =>{
         })
 
         rows.push(o);
+        setAlreadySubmitted(false)
         setLoading(false)
+        
       })
     }
+      if(result.lstProjectsAllocation.length >0 && result.IsSubmit){
+      console.log("111", result.lstProjectsAllocation.length)
+    result.lstProjectsAllocation.forEach(row => {
+      let o = {}
+
+      o['project'] = row.ProjectName
+      o['ProjectId'] = row.ProjectId
+      //console.log(this.state.rowData)
+      dates.forEach(date => {
+
+        o[`${moment(date).format('YYYY-MM-DD')}`] = 0;
+        
+      })
+
+      rows.push(o);
+      setAlreadySubmitted(true)
       setLoading(false)
-    
+      
+    })
+  }
+  if( rowData.length <0 ){
+    console.log("222")
+    setAlreadySubmitted(false)
+    console.log("alreadysubmitted222",alreadySubmitted)
+  }
       setRowData(rows)
       setTotalHours(0)
       
-
+     setLoading(false)
+     
       }
 
        fetchData();
       
       
     },[dates,user.UserId])
+
+    if (alreadySubmitted && rowData.length > 0 ) {
+
+      return (
+        loading ? (<ButtonsBarContainerWithSpinner isLoading={loading} />) :
+    (<div style={{alignContent: "center"}}>
+      <p style={{fontFamily: "monospace",backgroundColor: '#77DD77'}}>
+        Timesheet Already Submitted for selected week!</p>
+     </div>)
+      )
+      }
   
-    if (rowData.length <=0) {
+    if (rowData.length <=0  ) {
 
     return (
       loading ? (<ButtonsBarContainerWithSpinner isLoading={loading} />) :
@@ -281,10 +320,10 @@ allRowsData.forEach(row =>{
                       onGridReady={onGridReady}
                       onCellValueChanged={onCellValueChanged}
                       onCellEditingStarted = {function (event) {
-                        console.log('cellEditingStarted');
+                      //  console.log('cellEditingStarted');
                       }}
                       onCellEditingStopped={function (event) {
-                        console.log('cellEditingStopped');
+                      //  console.log('cellEditingStopped');
                       }}
                       frameworkComponents={frameworkComponents}
                       domLayout='autoHeight'

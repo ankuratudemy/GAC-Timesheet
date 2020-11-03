@@ -84,7 +84,7 @@ class AssignProject extends Component {
     handleInputChange = (e) => {
 
        
-        console.log(e.target.id.split("_")[0])
+       // console.log(e.target.id.split("_")[0])
         if(e.target.id.split("_")[0] === "Resource List" )
         {
             
@@ -99,7 +99,7 @@ class AssignProject extends Component {
         }
         if(e.target.id.split("_")[0] === "Project List" )
         {
-            console.log("Project Selected",e.target.getAttribute('data-key'))
+           // console.log("Project Selected",e.target.getAttribute('data-key'))
             //  console.log(e.target.id.split("_"))
             //  name = "employee"
             //  value = e.target.innerText
@@ -120,13 +120,13 @@ class AssignProject extends Component {
         }
   
 
-        console.log(this.state.project)
+        //console.log(this.state.project)
     }
 
     handleStartDatePick = (date) => {
 
         if(this.state.endDate && date >= this.state.endDate){
-            console.log("11")
+           // console.log("11")
             this.setState({showError : true, errorMessage: 'End Date cannot be before Start Date !'})
             
         }
@@ -140,7 +140,7 @@ class AssignProject extends Component {
     handleEndDatePick = (date) => {
 
         if(this.state.startDate && date <= this.state.startDate){
-            console.log("22")
+           // console.log("22")
             this.setState({showError : true, errorMessage: 'End Date cannot be before Start Date !'})
             
         }
@@ -167,10 +167,10 @@ class AssignProject extends Component {
                 }
         
                 
-                console.log("Assign project# ",dataToSubmit)
+               // console.log("Assign project# ",dataToSubmit)
                 const onSuccess = (data) => {
 
-                  console.log(data)
+                //  console.log(data)
                   if(data === "Project Assigned Successfully")
                   this.setState({showSuccess: true, successMessage: "Project Assigned Successfully"})
             
@@ -183,7 +183,7 @@ class AssignProject extends Component {
                 };
             
                 const onFailure = error => {
-                  console.log(error);
+                 // console.log(error);
                   this.setState({submitLoading: false,capacity:null,project: null,startDate:null,endDate: null,employee:null})
                  
                   //this.setState({errors: error.response.data, isLoading: false});
@@ -193,7 +193,7 @@ class AssignProject extends Component {
                     .then(onSuccess)
                     .catch(onFailure);
                   } catch (error) {
-                    console.log(error);
+                  //  console.log(error);
                   }        
         
         

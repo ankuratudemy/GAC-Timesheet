@@ -38,7 +38,7 @@ class SignIn extends React.Component {
       // Set JSON Web Token on success
       //setClientToken(data.token);
       //this.setState({isLoading: false, isAuthorized: true});
-      console.log(data)
+    //  console.log(data)
       if(data.Status === "Success")
       this.props.setCurrentUser(data)
 
@@ -50,7 +50,7 @@ class SignIn extends React.Component {
     };
 
     const onFailure = error => {
-      console.log(error);
+     // console.log(error);
       //this.setState({errors: error.response.data, isLoading: false});
     };
 
@@ -64,7 +64,7 @@ class SignIn extends React.Component {
       .then(onSuccess)
       .catch(onFailure);
     } catch (error) {
-      console.log(error);
+    //  console.log(error);
     }
   };
 
@@ -89,7 +89,7 @@ class SignIn extends React.Component {
                {this.state.errorMessage}
           </p>
              </Alert>):(null)}
-        <form onSubmit={this.handleSubmit}>
+        <form style={{alignItems: "center"}} onSubmit={this.handleSubmit}>
           <FormInput
             name='email'
             type='text'

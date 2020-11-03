@@ -34,7 +34,7 @@ const ApproveTimesheetTable = ({user}) => {
       async function fetchData() {
       let result = await makeGetCall('/gac/pendingTimeSheet',{})
     
-      console.log(result)
+     // console.log(result)
       setRowData(result)
       setLoading(false)
       }

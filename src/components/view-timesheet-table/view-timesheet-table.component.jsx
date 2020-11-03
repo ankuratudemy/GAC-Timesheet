@@ -25,13 +25,19 @@ const ViewTimesheetTable = ({user}) => {
       async function fetchData() {
       let result = await makeGetCall('/gac/viewTimeSheet',{svsId: user.UserId})
     
-      console.log(result)
+     // console.log(result)
       setRowData(result)
       setLoading(false)
       }
       fetchData();
     },[user.UserId])
   
+    function statusStyle(params) {
+      if(params.value === "approved")
+      return { backgroundColor: '#77DD77',fontWeight: 'bold' };
+      if(params.value ==="submitted")
+      return { backgroundColor: '#FDFD96' };
+    }
     
     return (
          loading ? (<ViewTimesheetTableWithSpinner isLoading={loading}/>)
@@ -44,7 +50,7 @@ const ViewTimesheetTable = ({user}) => {
                 <AgGridColumn field="WeekNumber"></AgGridColumn>
                 <AgGridColumn field="WeekEndDate"></AgGridColumn>
                 <AgGridColumn field="TotalHours"></AgGridColumn>
-                <AgGridColumn field="Status"></AgGridColumn>
+                <AgGridColumn field="Status" cellStyle={statusStyle} ></AgGridColumn>
             </AgGridReact>) : null}
         </div>
     ));

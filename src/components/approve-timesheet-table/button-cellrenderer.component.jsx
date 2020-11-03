@@ -26,15 +26,15 @@ class BtnCellRenderer extends React.Component {
 
               const onSuccess = (data) => {
 
-                console.log(data)
+               // console.log(data)
                 if(data === "TimeSheet Approved"){
-                  console.log("Changing status")
+                 // console.log("Changing status")
                   let newData = this.state.data
                   newData.Status = "Approved"
                   this.setState({
                     data: newData
                   })
-                  console.log("Statu chnaged to",this.state.data.Status)
+                 // console.log("Status chnaged to",this.state.data.Status)
 
                   }
                 }
@@ -42,7 +42,7 @@ class BtnCellRenderer extends React.Component {
              
           
               const onFailure = error => {
-                console.log(error);
+               // console.log(error);
                
               };
               
@@ -50,12 +50,12 @@ class BtnCellRenderer extends React.Component {
                   .then(onSuccess)
                   .catch(onFailure);
                 } catch (error) {
-                  console.log(error);
+                 // console.log(error);
                 }   
 
     }
     render() {
-      console.log(this.state.data)
+     // console.log(this.state.data)
       return (
         <ApproveTimesheetButton disabled={this.state.data.Status === "Approved" } type='submit' onClick={this.btnClickedHandler}> {this.state.data.Status === "submit" ? 'Approve': 'Approved'} </ApproveTimesheetButton>
 

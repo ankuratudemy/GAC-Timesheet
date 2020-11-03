@@ -15,7 +15,7 @@ moment.locale('uk', {
 })
 
 function getWeekDays(weekStart) {
-  console.log(weekStart)
+ // console.log(weekStart)
    
   const days = [weekStart];
   for (let i =1; i < 7; i += 1) {
@@ -62,7 +62,7 @@ class WeekSelector extends React.Component {
     if( date <= new Date()){
     this.props.setSubmitSelectedDays(getWeekDays(getWeekRange(date).from));
     let year_week = getWeekNumber(date)
-    console.log(year_week[1])
+    //console.log(year_week[1])
     this.props.setSubmitWeekNumber(year_week[1]);
     this.props.setSubmitHoverRange(getWeekRange(date))
     }
@@ -81,12 +81,16 @@ class WeekSelector extends React.Component {
   };
 
   handleWeekClick = (weekNumber, days, e) => {
-
+    
+    let thisweek = getWeekNumber(new Date())
+    console.log(thisweek[1] +'  '+ weekNumber)
+    if(thisweek[1] >= weekNumber )
+{
     this.props.setSubmitSelectedDays(days);
     this.props.setSubmitWeekNumber(weekNumber)
-    console.log("333");
+    //console.log("333");
     this.props.setSubmitHoverRange(getWeekRange(days[0]))
-    
+}
     
   };
 
