@@ -20,7 +20,7 @@ import {
 } from './header.styles';
 
 
-const Header = ({history,logoutUser }) => {
+const Header = ({history,logoutUser,currentUser }) => {
   const [isOpen, setIsOpen] = useState(false);
   const toggling = () => setIsOpen(!isOpen);
   let homeIcon = require('../../assets/home.svg')
@@ -53,18 +53,27 @@ const Header = ({history,logoutUser }) => {
             </DropDownList>
           </DropDownListContainer>
         )}
+        
       </OptionLink>
-      <OptionLink style={{display: 'flex', alignContent: 'space-between'}} to='/approve'><div style={{paddingRight: '2px'}}>
+
+      { currentUser.UserRole === "ADMIN" && (
+      <OptionLink style={{display: 'flex', alignContent: 'space-between'}} to='/approve'>
+        <div style={{paddingRight: '2px'}}>
              <img alt="approve_timesheet" width="15" height="15" src={approveTimesheetIcon} />
         </div>Approve Timesheets</OptionLink>
+        )}
+{ currentUser.UserRole === "ADMIN" && (
       <OptionLink style={{display: 'flex', alignContent: 'space-between'}} to='/assignproject'><div style={{paddingRight: '2px'}}>
+
              <img alt="assign project" width="15" height="15" src={assignProjectIcon} />
         </div>Assign Projects</OptionLink>
+)}
+{ currentUser.UserRole === "ADMIN" && (
       <OptionLink style={{display: 'flex', alignContent: 'space-between'}} to='/dashboard'><div style={{paddingRight: '2px'}}>
              <img alt="dashboard" width="15" height="15" src={dashboardIcon} />
         </div>Dashboard</OptionLink>
-     
-
+)}
+    
       
     </OptionsContainer>
     <ButtonsBarContainer>

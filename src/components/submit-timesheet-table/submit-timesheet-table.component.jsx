@@ -140,8 +140,6 @@ allRowsData.forEach(row =>{
 }
 
 
-
-
   )
   
   let dataToSubmit ={
@@ -160,10 +158,18 @@ allRowsData.forEach(row =>{
   const onSuccess = (data) => {
 
     //console.log("Data",data)
-    if(data === "TimeSheet Submitted")
+    if(data === "TimeSheet Submitted"){
     setShowSuccess(true)
+    setShow(true)
     setSuccessMessage("Timesheet Submitted Successfully")
     setLoading(false)
+    }
+    if(data==="TimeSheet Already Submitted"){
+      setShowAlert(true)
+      setShow(true)
+      setAlertMessage("Timesheet already submitted !")
+      setLoading(false)
+    }
     
     //TimeSheet Already Submitte
   };

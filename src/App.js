@@ -6,6 +6,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 import './App.css';
 import HomePage from './pages/homepage/homepage.component';
+import UnauthorizedPage from './pages/Unauthorized/unauthorized.component'
 import Timesheet from './pages/Timesheet/timesheet.component'
 import SignInAndSignUpPage from './pages/sign-in-and-sign-up/sign-in-and-sign-up.component';
 import AssignProject from './components/assign-project/assign-project.component'
@@ -34,10 +35,30 @@ class App extends React.Component {
           
           <Route path='/my-timesheet' render={() => this.props.currentUser ? (<Timesheet />) :(<SignInAndSignUpPage />)} />
           <Route path='/home' render={() => this.props.currentUser ? (<HomePage />) :(<SignInAndSignUpPage />)}  />
-          <Route exact path='/dashboard' render={() => this.props.currentUser ? (<HomePage />) :(<SignInAndSignUpPage />)}  />
-          <Route exact path='/approve' render={() => this.props.currentUser ? (<ApproveTimesheetTable />) :(<SignInAndSignUpPage />)}  />
+          <Route exact path='/dashboard' render={() => this.props.currentUser 
+            ? this.props.currentUser.UserRole ==="ADMIN" ?
+            (<HomePage />) 
+            : (<UnauthorizedPage/>)
+            :
+            (<SignInAndSignUpPage />)
+          }
+            />
+          <Route exact path='/approve' render={() => this.props.currentUser
+           ? this.props.currentUser.UserRole ==="ADMIN" ?
+            (<ApproveTimesheetTable />)
+            : (<UnauthorizedPage/>)
+            :
+            (<SignInAndSignUpPage />)
 
-          <Route exact path='/assignproject' render={() => this.props.currentUser ? (<AssignProject />) :(<SignInAndSignUpPage />)}  />
+            }
+            />
+
+          <Route exact path='/assignproject' render={() => this.props.currentUser
+             ? this.props.currentUser.UserRole ==="ADMIN" ?
+              (<AssignProject />)
+              :(<UnauthorizedPage/>)
+              :
+              (<SignInAndSignUpPage />)}  />
 
           <Route exact path='/signin'   render={() => this.props.currentUser ? ( <Redirect to='/my-timesheet' />
 
